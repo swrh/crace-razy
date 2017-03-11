@@ -4,7 +4,7 @@
 #include "earth.hpp"
 #include "track.hpp"
 
-union ALLEGRO_EVENT;
+#include <allegro5/allegro.h>
 
 class
 Game
@@ -16,7 +16,8 @@ private:
 public:
     Game();
 
-    void update(ALLEGRO_EVENT *event);
+    void init_update(double time);
+    void update(ALLEGRO_EVENT *event, double time);
     void draw();
 };
 

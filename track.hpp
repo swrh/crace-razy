@@ -14,6 +14,8 @@ private:
 public:
     Track();
 
+    void init_update(double time);
+    void update(ALLEGRO_EVENT *event, double time);
     void draw();
 };
 

@@ -21,9 +21,19 @@ Track::Track()
 }
 
 void
+Track::init_update(double time)
+{
+}
+
+void
+Track::update(ALLEGRO_EVENT *event, double time)
+{
+}
+
+void
 Track::draw()
 {
-    al_draw_line(5, 5, 200, 200, al_map_rgb(120, 120, 120), 1);
+    al_draw_line(5, 5, 200, 200, al_map_rgb(100, 100, 100), 100);
     al_draw_prim(&vtx[0], 0, 0, 0, vtx.size(), ALLEGRO_PRIM_LINE_LOOP);
 }
 

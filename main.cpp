@@ -11,12 +11,18 @@ main_loop(ALLEGRO_EVENT_QUEUE *event_queue)
     Game game;
     ALLEGRO_EVENT event;
     bool running = true;
+    double last_update_time, current_time;
+
+    last_update_time = al_get_time();
+    game.init_update(last_update_time);
 
     game.draw();
     al_flip_display();
 
     while (running) {
         al_wait_for_event(event_queue, &event);
+
+        current_time = al_get_time();
 
         switch (event.type) {
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -27,12 +33,20 @@ main_loop(ALLEGRO_EVENT_QUEUE *event_queue)
                 running = false;
             break;
         case ALLEGRO_EVENT_TIMER:
+            for (;;) {
+                double update_time = last_update_time + .25;
+                if (update_time >= current_time)
+                    break;
+                game.update(nullptr, update_time);
+                last_update_time = update_time;
+            }
+
+            game.update(&event, current_time);
+            last_update_time = current_time;
             game.draw();
             al_flip_display();
             break;
         }
-
-        std::cout << event.type << std::endl;
     }
 }
 
@@ -45,7 +59,7 @@ main()
     }
 
     ALLEGRO_DISPLAY *display = al_create_display(640, 480);
-    if (display == NULL) {
+    if (display == nullptr) {
         std::cerr << "error creating allegro display" << std::endl;
         return 1;
     }
@@ -60,14 +74,14 @@ main()
         return 1;
     }
 
-    ALLEGRO_TIMER *timer = al_create_timer(1);
-    if (display == NULL) {
+    ALLEGRO_TIMER *timer = al_create_timer(1. / 5);
+    if (display == nullptr) {
         std::cerr << "error creating allegro timer" << std::endl;
         return 1;
     }
 
     ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
-    if (event_queue == NULL) {
+    if (event_queue == nullptr) {
         std::cerr << "error creating allegro event queue" << std::endl;
         return 1;
     }
