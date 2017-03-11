@@ -1,7 +1,5 @@
 #include "earth.hpp"
 
-#include <allegro5/allegro.h>
-
 Earth::Earth()
 {
 }

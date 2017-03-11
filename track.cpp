@@ -1,10 +1,13 @@
 #include "track.hpp"
 
+#include "line.hpp"
+
 #include <allegro5/allegro_primitives.h>
 
 #include <math.h>
 
 Track::Track()
+    : first_update_time(0), last_update_time(0)
 {
     vtx.resize(13);
 
@@ -18,22 +21,29 @@ Track::Track()
         v.x = x; v.y = y; v.z = 0;
         v.color = al_map_rgb((ii + 1) % 3 * 64, (ii + 2) % 3 * 64, (ii) % 3 * 64);;
     }
+
+    direction.set(0, 180);
 }
 
 void
 Track::init_update(double time)
 {
+    first_update_time = time;
+    last_update_time = time;
 }
 
 void
 Track::update(ALLEGRO_EVENT *event, double time)
 {
+    direction.set(floorf(time - first_update_time) * (2 * ALLEGRO_PI) / 60. - ALLEGRO_PI / 2);
+    last_update_time = time;
 }
 
 void
 Track::draw()
 {
-    al_draw_line(5, 5, 200, 200, al_map_rgb(100, 100, 100), 100);
+    Line line = direction.toLine(Vertex(200, 200));
+    al_draw_line(line.x, line.y, line.a, line.b, al_map_rgb(100, 100, 100), 10);
     al_draw_prim(&vtx[0], 0, 0, 0, vtx.size(), ALLEGRO_PRIM_LINE_LOOP);
 }
 

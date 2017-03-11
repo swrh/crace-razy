@@ -1,6 +1,8 @@
 #if !defined(_TRACK_HPP_)
 #define _TRACK_HPP_
 
+#include "vector.hpp"
+
 #include <allegro5/allegro_primitives.h>
 
 #include <vector>
@@ -9,7 +11,11 @@ class
 Track
 {
 private:
+    float first_update_time, last_update_time;
+
     std::vector<ALLEGRO_VERTEX> vtx;
+
+    Vector direction;
 
 public:
     Track();

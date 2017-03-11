@@ -5,19 +5,24 @@
 
 #include <iostream>
 
+#define FREQ_UPDATE 1. / 30
+#define FREQ_FRAME 1. / 60
+
 void
-main_loop(ALLEGRO_EVENT_QUEUE *event_queue)
+main_loop(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_TIMER *frame_timer)
 {
     Game game;
     ALLEGRO_EVENT event;
     bool running = true;
     double last_update_time, current_time;
+    const double minimum_update_frequency = FREQ_UPDATE;
 
-    last_update_time = al_get_time();
-    game.init_update(last_update_time);
+    current_time = al_get_time();
 
+    game.init_update(current_time);
     game.draw();
     al_flip_display();
+    last_update_time = current_time;
 
     while (running) {
         al_wait_for_event(event_queue, &event);
@@ -34,17 +39,20 @@ main_loop(ALLEGRO_EVENT_QUEUE *event_queue)
             break;
         case ALLEGRO_EVENT_TIMER:
             for (;;) {
-                double update_time = last_update_time + .25;
+                double update_time = last_update_time + minimum_update_frequency;
                 if (update_time >= current_time)
                     break;
                 game.update(nullptr, update_time);
                 last_update_time = update_time;
             }
 
-            game.update(&event, current_time);
-            last_update_time = current_time;
-            game.draw();
-            al_flip_display();
+            if (event.timer.source == frame_timer) {
+                game.update(&event, current_time);
+                game.draw();
+                al_flip_display();
+                last_update_time = current_time;
+            }
+
             break;
         }
     }
@@ -74,7 +82,7 @@ main()
         return 1;
     }
 
-    ALLEGRO_TIMER *timer = al_create_timer(1. / 5);
+    ALLEGRO_TIMER *timer = al_create_timer(FREQ_FRAME);
     if (display == nullptr) {
         std::cerr << "error creating allegro timer" << std::endl;
         return 1;
@@ -92,7 +100,7 @@ main()
 
     al_start_timer(timer);
 
-    main_loop(event_queue);
+    main_loop(event_queue, timer);
 
     al_stop_timer(timer);
 

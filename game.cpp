@@ -19,7 +19,7 @@ Game::init_update(double time)
 void
 Game::update(ALLEGRO_EVENT *event, double time)
 {
-    std::cout << __func__ << ": " << time << " " << std::hex << (event != nullptr ? event->type : -1) << std::endl;
+    std::cout << __func__ << ": " << time << " " << std::hex << (event != nullptr ? event->type : 0) << std::endl;
     earth.update(event, time);
     track.update(event, time);
 }
