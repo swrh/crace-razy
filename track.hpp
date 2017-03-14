@@ -2,11 +2,10 @@
 #define _TRACK_HPP_
 
 #include "allegro/event.hpp"
+#include "allegro/polygon.hpp"
 
 #include "object.hpp"
 #include "vector.hpp"
-
-#include <allegro5/allegro_primitives.h>
 
 #include <vector>
 
@@ -19,7 +18,7 @@ track
 private:
     float first_update_time, last_update_time;
 
-    std::vector<ALLEGRO_VERTEX> vtx;
+    allegro::polygon polygon;
 
     vector direction;
 

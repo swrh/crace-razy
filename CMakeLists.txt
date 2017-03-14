@@ -9,6 +9,8 @@ use_cxx11 ()
 add_executable (crace-razy
 	allegro/event.cpp
 	allegro/event.hpp
+	allegro/polygon.cpp
+	allegro/polygon.hpp
 	earth.cpp
 	earth.hpp
 	game.cpp
