@@ -7,6 +7,8 @@ include (cmake/use_cxx11.cmake)
 use_cxx11 ()
 
 add_executable (crace-razy
+	allegro/event.cpp
+	allegro/event.hpp
 	earth.cpp
 	earth.hpp
 	game.cpp

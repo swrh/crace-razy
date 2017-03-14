@@ -35,7 +35,7 @@ track::init_update(double time)
 }
 
 void
-track::update(ALLEGRO_EVENT *event, double time)
+track::update(allegro::event *event, double time)
 {
     direction.set(floorf(time - first_update_time) * (2 * ALLEGRO_PI) / 60. - ALLEGRO_PI / 2);
     last_update_time = time;

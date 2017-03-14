@@ -1,6 +1,8 @@
 #if !defined(_TRACK_HPP_)
 #define _TRACK_HPP_
 
+#include "allegro/event.hpp"
+
 #include "object.hpp"
 #include "vector.hpp"
 
@@ -25,7 +27,7 @@ public:
     track();
 
     void init_update(double time);
-    void update(ALLEGRO_EVENT *event, double time);
+    void update(allegro::event *event, double time);
     void draw();
 };
 

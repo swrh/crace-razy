@@ -25,9 +25,9 @@ game::init_update(double time)
 }
 
 void
-game::update(ALLEGRO_EVENT *event, double time)
+game::update(allegro::event *event, double time)
 {
-    std::cout << __func__ << ": " << time << " " << std::hex << (event != nullptr ? event->type : 0) << std::endl;
+    std::cout << __func__ << ": " << time << " " << std::hex << (event != nullptr ? event->get().type : 0) << std::endl;
 
     for (std::shared_ptr<object> &o : objects) {
         o->update(event, time);

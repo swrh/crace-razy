@@ -1,3 +1,5 @@
+#include "allegro/event.hpp"
+
 #include "game.hpp"
 
 #include <allegro5/allegro.h>
@@ -8,13 +10,14 @@
 #define FREQ_UPDATE 1. / 30
 #define FREQ_FRAME 1. / 60
 
+using cr::allegro::event;
 using cr::game;
 
 void
 main_loop(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_TIMER *frame_timer)
 {
     game game;
-    ALLEGRO_EVENT event;
+    event event;
     bool running = true;
     double last_update_time, current_time;
     const double minimum_update_frequency = FREQ_UPDATE;
@@ -27,16 +30,16 @@ main_loop(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_TIMER *frame_timer)
     last_update_time = current_time;
 
     while (running) {
-        al_wait_for_event(event_queue, &event);
+        al_wait_for_event(event_queue, &event.get());
 
         current_time = al_get_time();
 
-        switch (event.type) {
+        switch (event.get().type) {
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
             running = false;
             break;
         case ALLEGRO_EVENT_KEY_DOWN:
-            if (event.keyboard.keycode == ALLEGRO_KEY_ESCAPE)
+            if (event.get().keyboard.keycode == ALLEGRO_KEY_ESCAPE)
                 running = false;
             break;
         case ALLEGRO_EVENT_TIMER:
@@ -48,7 +51,7 @@ main_loop(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_TIMER *frame_timer)
                 last_update_time = update_time;
             }
 
-            if (event.timer.source == frame_timer) {
+            if (event.get().timer.source == frame_timer) {
                 game.update(&event, current_time);
                 game.draw();
                 al_flip_display();

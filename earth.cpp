@@ -1,5 +1,8 @@
 #include "earth.hpp"
 
+#include <allegro5/allegro.h>
+
+using cr::allegro::event;
 using cr::earth;
 
 earth::earth()
@@ -12,7 +15,7 @@ earth::init_update(double time)
 }
 
 void
-earth::update(ALLEGRO_EVENT *event, double time)
+earth::update(allegro::event *event, double time)
 {
 }
 

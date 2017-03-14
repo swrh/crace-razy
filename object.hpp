@@ -1,7 +1,7 @@
 #if !defined(_OBJECT_HPP_)
 #define _OBJECT_HPP_
 
-#include <allegro5/allegro_primitives.h>
+#include "allegro/event.hpp"
 
 namespace cr {
 
@@ -12,7 +12,7 @@ public:
     virtual ~object();
 
     virtual void init_update(double time) = 0;
-    virtual void update(ALLEGRO_EVENT *event, double time) = 0;
+    virtual void update(allegro::event *event, double time) = 0;
     virtual void draw() = 0;
 };
 

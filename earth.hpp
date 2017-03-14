@@ -1,9 +1,9 @@
 #if !defined(_EARTH_HPP_)
 #define _EARTH_HPP_
 
-#include "object.hpp"
+#include "allegro/event.hpp"
 
-#include <allegro5/allegro.h>
+#include "object.hpp"
 
 namespace cr {
 
@@ -15,7 +15,7 @@ public:
     earth();
 
     void init_update(double time);
-    void update(ALLEGRO_EVENT *event, double time);
+    void update(allegro::event *event, double time);
     void draw();
 };
 

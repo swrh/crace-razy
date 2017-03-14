@@ -1,10 +1,10 @@
 #if !defined(_GAME_HPP_)
 #define _GAME_HPP_
 
+#include "allegro/event.hpp"
+
 #include "earth.hpp"
 #include "track.hpp"
-
-#include <allegro5/allegro.h>
 
 #include <list>
 #include <memory>
@@ -21,7 +21,7 @@ public:
     game();
 
     void init_update(double time);
-    void update(ALLEGRO_EVENT *event, double time);
+    void update(allegro::event *event, double time);
     void draw();
 };
 
