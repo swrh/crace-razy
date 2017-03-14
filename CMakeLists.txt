@@ -1,11 +1,10 @@
-cmake_minimum_required (VERSION 3.1 FATAL_ERROR)
+cmake_minimum_required (VERSION 2.8 FATAL_ERROR)
 
-project (crace-razy
-	VERSION 0.0.1
-	LANGUAGES CXX
-	)
+project (crace-razy)
 
-set (CMAKE_CXX_STANDARD 11)
+include (cmake/use_cxx11.cmake)
+
+use_cxx11 ()
 
 add_executable (crace-razy
 	earth.cpp
