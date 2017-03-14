@@ -8,10 +8,12 @@
 #define FREQ_UPDATE 1. / 30
 #define FREQ_FRAME 1. / 60
 
+using cr::game;
+
 void
 main_loop(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_TIMER *frame_timer)
 {
-    Game game;
+    game game;
     ALLEGRO_EVENT event;
     bool running = true;
     double last_update_time, current_time;

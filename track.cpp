@@ -6,7 +6,9 @@
 
 #include <math.h>
 
-Track::Track()
+using cr::track;
+
+track::track()
     : first_update_time(0), last_update_time(0)
 {
     vtx.resize(13);
@@ -26,23 +28,23 @@ Track::Track()
 }
 
 void
-Track::init_update(double time)
+track::init_update(double time)
 {
     first_update_time = time;
     last_update_time = time;
 }
 
 void
-Track::update(ALLEGRO_EVENT *event, double time)
+track::update(ALLEGRO_EVENT *event, double time)
 {
     direction.set(floorf(time - first_update_time) * (2 * ALLEGRO_PI) / 60. - ALLEGRO_PI / 2);
     last_update_time = time;
 }
 
 void
-Track::draw()
+track::draw()
 {
-    Line line = direction.toLine(Vertex(200, 200));
+    line line = direction.to_line(vertex(200, 200));
     al_draw_line(line.x, line.y, line.a, line.b, al_map_rgb(100, 100, 100), 10);
     al_draw_prim(&vtx[0], 0, 0, 0, vtx.size(), ALLEGRO_PRIM_LINE_LOOP);
 }

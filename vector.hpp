@@ -4,20 +4,24 @@
 #include "line.hpp"
 #include "vertex.hpp"
 
+namespace cr {
+
 struct
-Vector
+vector
 {
     float theta, a;
 
-    Vector();
-    Vector(float theta, float a);
+    vector();
+    vector(float theta, float a);
 
     void set(float theta);
     void set(float theta, float a);
     void rotate(float r);
 
-    Line toLine(const Vertex &base) const;
+    line to_line(const vertex &base) const;
 };
+
+}
 
 #endif // !defined(_VECTOR_HPP_)
 

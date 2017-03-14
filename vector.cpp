@@ -2,24 +2,27 @@
 
 #include <math.h>
 
-Vector::Vector()
+using cr::line;
+using cr::vector;
+
+vector::vector()
     : theta(0), a(0)
 {
 }
 
-Vector::Vector(float theta, float a)
+vector::vector(float theta, float a)
     : theta(theta), a(a)
 {
 }
 
 void
-Vector::set(float theta)
+vector::set(float theta)
 {
     this->theta = theta;
 }
 
 void
-Vector::set(float theta, float a)
+vector::set(float theta, float a)
 {
     this->theta = theta;
     this->a = a;
@@ -30,15 +33,15 @@ Vector::set(float theta, float a)
  * @param rad Angle in radian.
  */
 void
-Vector::rotate(float rad)
+vector::rotate(float rad)
 {
     theta += rad;
 }
 
-Line
-Vector::toLine(const Vertex &base) const
+line
+vector::to_line(const vertex &base) const
 {
-    return Line(base.x, base.y, base.x + cosf(theta) * a, base.y + sinf(theta) * a);
+    return line(base.x, base.y, base.x + cosf(theta) * a, base.y + sinf(theta) * a);
 }
 
 // vim:set sw=4 ts=4 et:

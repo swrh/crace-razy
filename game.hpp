@@ -6,20 +6,26 @@
 
 #include <allegro5/allegro.h>
 
+#include <list>
+#include <memory>
+
+namespace cr {
+
 class
-Game
+game
 {
 private:
-    Earth earth;
-    Track track;
+    std::list<std::shared_ptr<object> > objects;
 
 public:
-    Game();
+    game();
 
     void init_update(double time);
     void update(ALLEGRO_EVENT *event, double time);
     void draw();
 };
+
+}
 
 #endif // !defined(_GAME_HPP_)
 

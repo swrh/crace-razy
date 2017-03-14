@@ -1,21 +1,23 @@
 #include "earth.hpp"
 
-Earth::Earth()
+using cr::earth;
+
+earth::earth()
 {
 }
 
 void
-Earth::init_update(double time)
+earth::init_update(double time)
 {
 }
 
 void
-Earth::update(ALLEGRO_EVENT *event, double time)
+earth::update(ALLEGRO_EVENT *event, double time)
 {
 }
 
 void
-Earth::draw()
+earth::draw()
 {
     al_clear_to_color(al_map_rgb(0, 100, 50));
 }

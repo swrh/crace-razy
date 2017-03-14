@@ -14,6 +14,8 @@ add_executable (crace-razy
 	line.cpp
 	line.hpp
 	main.cpp
+	object.cpp
+	object.hpp
 	track.cpp
 	track.hpp
 	vector.cpp

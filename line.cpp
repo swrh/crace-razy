@@ -1,6 +1,8 @@
 #include "line.hpp"
 
-Line::Line(float x, float y, float a, float b)
+using cr::line;
+
+line::line(float x, float y, float a, float b)
     : x(x), y(y), a(a), b(b)
 {
 }

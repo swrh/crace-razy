@@ -1,29 +1,35 @@
 #if !defined(_TRACK_HPP_)
 #define _TRACK_HPP_
 
+#include "object.hpp"
 #include "vector.hpp"
 
 #include <allegro5/allegro_primitives.h>
 
 #include <vector>
 
+namespace cr {
+
 class
-Track
+track
+: public object
 {
 private:
     float first_update_time, last_update_time;
 
     std::vector<ALLEGRO_VERTEX> vtx;
 
-    Vector direction;
+    vector direction;
 
 public:
-    Track();
+    track();
 
     void init_update(double time);
     void update(ALLEGRO_EVENT *event, double time);
     void draw();
 };
+
+}
 
 #endif // !defined(_TRACK_HPP_)
 

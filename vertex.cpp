@@ -1,31 +1,33 @@
 #include "vertex.hpp"
 
-Vertex::Vertex()
+using cr::vertex;
+
+vertex::vertex()
     : x(0), y(0)
 {
 }
 
-Vertex::Vertex(float x, float y)
+vertex::vertex(float x, float y)
     : x(x), y(y)
 {
 }
 
 void
-Vertex::set(float x, float y)
+vertex::set(float x, float y)
 {
     this->x = x;
     this->y = y;
 }
 
 void
-Vertex::move(float x, float y)
+vertex::move(float x, float y)
 {
     this->x += x;
     this->y += y;
 }
 
 void
-Vertex::move(const Vertex &p)
+vertex::move(const vertex &p)
 {
     this->x += p.x;
     this->y += p.y;

@@ -1,18 +1,22 @@
 #if !defined(_VERTEX_HPP_)
 #define _VERTEX_HPP_
 
+namespace cr {
+
 struct
-Vertex
+vertex
 {
     float x, y;
 
-    Vertex();
-    Vertex(float x, float y);
+    vertex();
+    vertex(float x, float y);
 
     void set(float x, float y);
     void move(float x, float y);
-    void move(const Vertex &p);
+    void move(const vertex &p);
 };
+
+}
 
 #endif // !defined(_VERTEX_HPP_)
 
