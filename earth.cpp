@@ -2,8 +2,7 @@
 
 #include <allegro5/allegro.h>
 
-using cr::allegro::event;
-using cr::earth;
+using namespace cr;
 
 earth::earth()
 {

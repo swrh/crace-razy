@@ -10,14 +10,13 @@
 #define FREQ_UPDATE 1. / 30
 #define FREQ_FRAME 1. / 60
 
-using cr::allegro::event;
-using cr::game;
+using namespace cr;
 
 void
 main_loop(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_TIMER *frame_timer)
 {
     game game;
-    event event;
+    allegro::event event;
     bool running = true;
     double last_update_time, current_time;
     const double minimum_update_frequency = FREQ_UPDATE;

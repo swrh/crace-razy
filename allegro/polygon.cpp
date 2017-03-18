@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 
-using cr::allegro::polygon;
+using namespace cr::allegro;
 
 polygon::polygon()
 {

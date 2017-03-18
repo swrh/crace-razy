@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 
-using cr::allegro::event;
+using namespace cr::allegro;
 
 event::event()
 {

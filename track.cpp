@@ -6,7 +6,7 @@
 
 #include <math.h>
 
-using cr::track;
+using namespace cr;
 
 track::track()
     : first_update_time(0), last_update_time(0), polygon(13)

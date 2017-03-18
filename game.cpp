@@ -5,8 +5,7 @@
 #include <iostream>
 #include <memory>
 
-using cr::game;
-using cr::object;
+using namespace cr;
 
 game::game()
 {

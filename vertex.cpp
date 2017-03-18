@@ -1,6 +1,6 @@
 #include "vertex.hpp"
 
-using cr::vertex;
+using namespace cr;
 
 vertex::vertex()
     : x(0), y(0)

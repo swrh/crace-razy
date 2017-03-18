@@ -1,6 +1,6 @@
 #include "object.hpp"
 
-using cr::object;
+using namespace cr;
 
 object::~object()
 {

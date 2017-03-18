@@ -2,8 +2,7 @@
 
 #include <math.h>
 
-using cr::line;
-using cr::vector;
+using namespace cr;
 
 vector::vector()
     : theta(0), a(0)
