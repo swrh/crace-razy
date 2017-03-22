@@ -1,6 +1,6 @@
-#include "allegro/event.hpp"
-
 #include "game.hpp"
+
+#include "allegro/event.hpp"
 
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>

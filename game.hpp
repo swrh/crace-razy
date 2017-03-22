@@ -1,10 +1,10 @@
 #if !defined(_GAME_HPP_)
 #define _GAME_HPP_
 
-#include "allegro/event.hpp"
-
 #include "earth.hpp"
 #include "track.hpp"
+
+#include "allegro/event.hpp"
 
 #include <list>
 #include <memory>

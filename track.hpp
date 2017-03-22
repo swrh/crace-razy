@@ -1,11 +1,11 @@
 #if !defined(_TRACK_HPP_)
 #define _TRACK_HPP_
 
-#include "allegro/event.hpp"
-#include "allegro/polygon.hpp"
-
 #include "object.hpp"
 #include "vector.hpp"
+
+#include "allegro/event.hpp"
+#include "allegro/polygon.hpp"
 
 #include <vector>
 

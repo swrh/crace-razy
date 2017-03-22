@@ -9,6 +9,8 @@ include (cmake/use_cxx11.cmake)
 use_cxx11 ()
 
 add_executable (crace-razy
+	./allegro/color.cpp
+	./allegro/color.hpp
 	./allegro/event.cpp
 	./allegro/event.hpp
 	./allegro/polygon.cpp

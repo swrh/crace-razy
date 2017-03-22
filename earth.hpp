@@ -1,9 +1,9 @@
 #if !defined(_EARTH_HPP_)
 #define _EARTH_HPP_
 
-#include "allegro/event.hpp"
-
 #include "object.hpp"
+
+#include "allegro/event.hpp"
 
 namespace cr {
 
