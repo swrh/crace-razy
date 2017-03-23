@@ -1,7 +1,6 @@
 #if !defined(_VECTOR_HPP_)
 #define _VECTOR_HPP_
 
-#include "line.hpp"
 #include "vertex.hpp"
 
 namespace cr {
@@ -17,8 +16,6 @@ vector
     void set(float theta);
     void set(float theta, float a);
     void rotate(float r);
-
-    line to_line(const vertex &base) const;
 };
 
 }

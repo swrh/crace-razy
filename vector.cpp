@@ -1,7 +1,5 @@
 #include "vector.hpp"
 
-#include <math.h>
-
 using namespace cr;
 
 vector::vector()
@@ -35,12 +33,6 @@ void
 vector::rotate(float rad)
 {
     theta += rad;
-}
-
-line
-vector::to_line(const vertex &base) const
-{
-    return line(base.x, base.y, base.x + cosf(theta) * a, base.y + sinf(theta) * a);
 }
 
 // vim:set sw=4 ts=4 et:

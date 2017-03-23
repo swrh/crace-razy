@@ -1,6 +1,11 @@
 #if !defined(_LINE_HPP_)
 #define _LINE_HPP_
 
+#include "vector.hpp"
+#include "vertex.hpp"
+
+#include "allegro/color.hpp"
+
 namespace cr {
 
 struct
@@ -8,7 +13,9 @@ line
 {
     float x, y, a, b;
 
-    line(float x, float y, float a, float b);
+    line(const vertex &base, const vector &vect);
+
+    void draw(const allegro::color::allegro_color &color, float thickness) const;
 };
 
 }

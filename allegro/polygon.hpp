@@ -13,10 +13,10 @@ polygon
 {
 public:
     typedef std::size_t size_type;
-    typedef ALLEGRO_VERTEX vertex;
+    typedef ALLEGRO_VERTEX allegro_vertex;
 
 private:
-    std::vector<vertex> data;
+    std::vector<allegro_vertex> data;
 
 public:
     polygon();
@@ -24,9 +24,11 @@ public:
     ~polygon();
 
     size_type size() const;
-    vertex &at(size_type pos);
+    allegro_vertex &at(size_type pos);
 
-    vertex &operator[](size_type pos);
+    allegro_vertex &operator[](size_type pos);
+
+    void draw() const;
 };
 
 }

@@ -4,7 +4,7 @@
 
 using namespace cr::allegro;
 
-ALLEGRO_COLOR
+color::allegro_color
 color::rgb(unsigned char r, unsigned char g, unsigned char b)
 {
     return al_map_rgb(r, g, b);

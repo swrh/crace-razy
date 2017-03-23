@@ -9,12 +9,15 @@ namespace allegro {
 class
 color
 {
+public:
+    typedef ALLEGRO_COLOR allegro_color;
+
 private:
     color();
     ~color();
 
 public:
-    static ALLEGRO_COLOR rgb(unsigned char r, unsigned char g, unsigned char b);
+    static allegro_color rgb(unsigned char r, unsigned char g, unsigned char b);
 };
 
 }

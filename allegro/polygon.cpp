@@ -27,16 +27,22 @@ polygon::size() const
     return data.size();
 }
 
-polygon::vertex &
+polygon::allegro_vertex &
 polygon::at(polygon::size_type pos)
 {
     return data.at(pos);
 }
 
-polygon::vertex &
+polygon::allegro_vertex &
 polygon::operator[](polygon::size_type pos)
 {
     return data[pos];
+}
+
+void
+polygon::draw() const
+{
+    al_draw_prim(&data[0], 0, 0, 0, data.size(), ALLEGRO_PRIM_LINE_LOOP);
 }
 
 // vim:set sw=4 ts=4 et:

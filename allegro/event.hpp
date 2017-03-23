@@ -9,14 +9,17 @@ namespace allegro {
 class
 event
 {
+public:
+    typedef ALLEGRO_EVENT allegro_event;
+
 private:
-    ALLEGRO_EVENT *data;
+    allegro_event *data;
 
 public:
     event();
     ~event();
 
-    ALLEGRO_EVENT &get();
+    allegro_event &get();
 };
 
 }

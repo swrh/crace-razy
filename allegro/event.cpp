@@ -10,17 +10,15 @@ using namespace cr::allegro;
 
 event::event()
 {
-    data = static_cast<ALLEGRO_EVENT *>(malloc(sizeof(ALLEGRO_EVENT)));
-    if (data == nullptr)
-        throw std::bad_alloc();
+    data = new allegro_event();
 }
 
 event::~event()
 {
-    free(data);
+    delete data;
 }
 
-ALLEGRO_EVENT &
+event::allegro_event &
 event::get()
 {
     return *data;
