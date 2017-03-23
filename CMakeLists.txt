@@ -9,42 +9,21 @@ include (cmake/use_cxx11.cmake)
 use_cxx11 ()
 
 add_executable (crace-razy
-	./allegro/color.cpp
-	./allegro/color.hpp
-	./allegro/event.cpp
-	./allegro/event.hpp
-	./allegro/line.cpp
-	./allegro/line.hpp
-	./allegro/polygon.cpp
-	./allegro/polygon.hpp
-	./allegro/vector.cpp
-	./allegro/vector.hpp
-	./allegro/vertex.cpp
-	./allegro/vertex.hpp
-	./earth.cpp
-	./earth.hpp
-	./game.cpp
-	./game.hpp
 	./main.cpp
-	./object.cpp
-	./object.hpp
-	./track.cpp
-	./track.hpp
 	)
 
-pkg_check_modules(ALLEGRO REQUIRED
-	allegro-5.0
-	allegro_primitives-5.0
+pkg_check_modules(SDL2 REQUIRED
+	sdl2
 	)
 
 target_link_libraries (crace-razy
-	${ALLEGRO_LIBRARIES}
+	${SDL2_LIBRARIES}
 	)
 
 target_include_directories(crace-razy PUBLIC
-	${ALLEGRO_INCLUDE_DIRS}
+	${SDL2_INCLUDE_DIRS}
 	)
 
 target_compile_options(crace-razy PUBLIC
-	${ALLEGRO_CFLAGS_OTHER}
+	${SDL2_CFLAGS_OTHER}
 	)
