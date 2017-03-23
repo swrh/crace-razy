@@ -24,6 +24,7 @@ public:
     ~polygon();
 
     size_type size() const;
+    const allegro_vertex &at(size_type pos) const;
     allegro_vertex &at(size_type pos);
 
     allegro_vertex &operator[](size_type pos);

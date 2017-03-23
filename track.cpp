@@ -1,8 +1,7 @@
 #include "track.hpp"
 
-#include "line.hpp"
-
 #include "allegro/color.hpp"
+#include "allegro/line.hpp"
 
 #include <allegro5/allegro_primitives.h>
 
@@ -44,7 +43,7 @@ track::update(allegro::event *event, double time)
 void
 track::draw()
 {
-    line line(vertex(200, 200), direction);
+    allegro::line line(allegro::vertex(200, 200), direction);
     line.draw(allegro::color::rgb(100, 100, 100), 10);
     polygon.draw();
 }

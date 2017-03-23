@@ -2,12 +2,10 @@
 #define _TRACK_HPP_
 
 #include "object.hpp"
-#include "vector.hpp"
 
 #include "allegro/event.hpp"
 #include "allegro/polygon.hpp"
-
-#include <vector>
+#include "allegro/vector.hpp"
 
 namespace cr {
 
@@ -20,7 +18,7 @@ private:
 
     allegro::polygon polygon;
 
-    vector direction;
+    allegro::vector direction;
 
 public:
     track();

@@ -1,6 +1,6 @@
 #include "vertex.hpp"
 
-using namespace cr;
+using namespace cr::allegro;
 
 vertex::vertex()
     : x(0), y(0)

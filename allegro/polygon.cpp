@@ -27,6 +27,12 @@ polygon::size() const
     return data.size();
 }
 
+const polygon::allegro_vertex &
+polygon::at(polygon::size_type pos) const
+{
+    return data.at(pos);
+}
+
 polygon::allegro_vertex &
 polygon::at(polygon::size_type pos)
 {

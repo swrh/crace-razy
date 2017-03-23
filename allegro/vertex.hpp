@@ -1,7 +1,8 @@
-#if !defined(_VERTEX_HPP_)
-#define _VERTEX_HPP_
+#if !defined(_ALLEGRO_VERTEX_HPP_)
+#define _ALLEGRO_VERTEX_HPP_
 
 namespace cr {
+namespace allegro {
 
 struct
 vertex
@@ -17,7 +18,8 @@ vertex
 };
 
 }
+}
 
-#endif // !defined(_VERTEX_HPP_)
+#endif // !defined(_ALLEGRO_VERTEX_HPP_)
 
 // vim:set sw=4 ts=4 et:

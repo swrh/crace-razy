@@ -1,6 +1,6 @@
 #include "vector.hpp"
 
-using namespace cr;
+using namespace cr::allegro;
 
 vector::vector()
     : theta(0), a(0)

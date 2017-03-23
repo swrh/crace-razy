@@ -1,9 +1,10 @@
-#if !defined(_VECTOR_HPP_)
-#define _VECTOR_HPP_
+#if !defined(_ALLEGRO_VECTOR_HPP_)
+#define _ALLEGRO_VECTOR_HPP_
 
 #include "vertex.hpp"
 
 namespace cr {
+namespace allegro {
 
 struct
 vector
@@ -19,7 +20,8 @@ vector
 };
 
 }
+}
 
-#endif // !defined(_VECTOR_HPP_)
+#endif // !defined(_ALLEGRO_VECTOR_HPP_)
 
 // vim:set sw=4 ts=4 et:

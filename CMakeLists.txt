@@ -13,23 +13,23 @@ add_executable (crace-razy
 	./allegro/color.hpp
 	./allegro/event.cpp
 	./allegro/event.hpp
+	./allegro/line.cpp
+	./allegro/line.hpp
 	./allegro/polygon.cpp
 	./allegro/polygon.hpp
+	./allegro/vector.cpp
+	./allegro/vector.hpp
+	./allegro/vertex.cpp
+	./allegro/vertex.hpp
 	./earth.cpp
 	./earth.hpp
 	./game.cpp
 	./game.hpp
-	./line.cpp
-	./line.hpp
 	./main.cpp
 	./object.cpp
 	./object.hpp
 	./track.cpp
 	./track.hpp
-	./vector.cpp
-	./vector.hpp
-	./vertex.cpp
-	./vertex.hpp
 	)
 
 pkg_check_modules(ALLEGRO REQUIRED
