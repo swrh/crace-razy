@@ -10,6 +10,8 @@ use_cxx11 ()
 
 add_executable (crace-razy
 	./main.cpp
+	./sdl.cpp
+	./sdl.hpp
 	)
 
 pkg_check_modules(SDL2 REQUIRED
