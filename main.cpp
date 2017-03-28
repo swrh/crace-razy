@@ -1,10 +1,14 @@
+#include "sdl/error.hpp"
 #include "sdl.hpp"
+#include "sdl/img.hpp"
 
 #include <iostream>
 #include <string>
 
 #include <err.h>
 #include <stdio.h>
+
+#include <SDL_image.h>
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -35,6 +39,9 @@ run_game()
             }
         }
 
+        if (SDL_RenderClear(renderer.get())) {
+            throw sdl::error("SDL_RenderClear");
+        }
         SDL_RenderCopy(renderer.get(), texture.get(), NULL, NULL);
         SDL_RenderPresent(renderer.get());
     }
@@ -57,7 +64,7 @@ main(int argc, char *argv[])
     try {
         run_game();
     } catch (std::exception &ex) {
-        warn("unhandled exception: %s", ex.what());
+        warnx("unhandled exception: %s", ex.what());
         exit_code = EXIT_FAILURE;
     }
 

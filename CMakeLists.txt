@@ -9,9 +9,20 @@ include (cmake/use_cxx11.cmake)
 use_cxx11 ()
 
 add_executable (crace-razy
+	./exception.cpp
+	./exception.hpp
 	./main.cpp
 	./sdl.cpp
 	./sdl.hpp
+	./sdl/error.cpp
+	./sdl/error.hpp
+	./sdl/exception.cpp
+	./sdl/exception.hpp
+	./sdl/img.cpp
+	./sdl/img.hpp
+	./sdl/img/error.cpp
+	./sdl/img/error.hpp
+	./sdl/types.hpp
 	)
 
 pkg_check_modules(SDL2 REQUIRED
