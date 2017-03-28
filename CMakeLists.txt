@@ -14,6 +14,7 @@ add_executable (crace-razy
 
 pkg_check_modules(SDL2 REQUIRED
 	sdl2
+	SDL2_image
 	)
 
 target_link_libraries (crace-razy
