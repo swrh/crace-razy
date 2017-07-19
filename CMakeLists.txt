@@ -1,43 +1,38 @@
-cmake_minimum_required (VERSION 2.8 FATAL_ERROR)
+# CMakeLists.txt
 
-project (crace-razy)
+cmake_minimum_required (VERSION 3.1 FATAL_ERROR)
 
-find_package(PkgConfig)
+project (lozti)
 
-include (cmake/use_cxx11.cmake)
+# Enable C++11
+set (CMAKE_CXX_STANDARD 11)
 
-use_cxx11 ()
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
 
-add_executable (crace-razy
-	./exception.cpp
-	./exception.hpp
-	./main.cpp
-	./sdl.cpp
-	./sdl.hpp
-	./sdl/error.cpp
-	./sdl/error.hpp
-	./sdl/exception.cpp
-	./sdl/exception.hpp
-	./sdl/img.cpp
-	./sdl/img.hpp
-	./sdl/img/error.cpp
-	./sdl/img/error.hpp
-	./sdl/types.hpp
+find_package (PkgConfig)
+
+# Source files.
+file (GLOB_RECURSE COMMON_SOURCES
+	./src/*.cpp
+	./src/*.hpp
+	)
+
+add_executable (lozti
+	${COMMON_SOURCES}
 	)
 
 pkg_check_modules(SDL2 REQUIRED
 	sdl2
-	SDL2_image
 	)
 
-target_link_libraries (crace-razy
+target_link_libraries (lozti
 	${SDL2_LIBRARIES}
 	)
 
-target_include_directories(crace-razy PUBLIC
+target_include_directories(lozti PUBLIC
 	${SDL2_INCLUDE_DIRS}
 	)
 
-target_compile_options(crace-razy PUBLIC
+target_compile_options(lozti PUBLIC
 	${SDL2_CFLAGS_OTHER}
 	)
