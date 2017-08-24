@@ -2,6 +2,8 @@
 #define _LOZTI_PIECE_HPP_
 
 #include <algorithm>
+#include <stdexcept>
+#include <vector>
 
 namespace lozti {
 
@@ -9,37 +11,53 @@ class
 piece
 {
 public:
-    constexpr static std::size_t
-    size()
-    {
-        return 5;
-    }
-
-    typedef char square_type;
-    typedef std::array<square_type, 5> line_type;
-    typedef std::array<line_type, 5> matrix_type;
+    typedef char data_type;
+    typedef std::vector<data_type> line_type;
+    typedef std::vector<line_type> matrix_type;
+    typedef matrix_type::size_type size_type;
 
 private:
     matrix_type board_;
 
-    piece(matrix_type &&b, bool symetric = false)
-        : board_(b), symetric_(symetric)
+    piece(matrix_type &&board, bool symmetric = false)
+        : symmetric_(symmetric)
     {
+        size_type sz = board.size();
+
+        for (const auto &line : board) {
+            if (line.size() != sz)
+                throw std::runtime_error("non symmetric matrix passed to piece constructor");
+        }
+
+        board_.swap(board);
     }
 
 private:
-    bool symetric_;
+    bool symmetric_;
+
+public:
+    size_type
+    size() const
+    {
+        return board_.size();
+    }
+
+    const line_type &
+    at(size_type n) const
+    {
+        return board_.at(n);
+    }
 
 public:
     void
     rotate()
     {
-        if (symetric_)
+        if (symmetric_)
             return;
 
-        for (std::size_t y = 0; y < (size() / 2); y++) {
-            for (std::size_t x = y; x < (size() - y - 1); x++) {
-                square_type t = board_[y][x];
+        for (size_type y = 0; y < (size() / 2); y++) {
+            for (size_type x = y; x < (size() - y - 1); x++) {
+                data_type t = board_[y][x];
 
                 std::swap(t, board_[x][size() - y - 1]);
                 std::swap(t, board_[size() - y - 1][size() - x - 1]);
@@ -52,87 +70,80 @@ public:
     void
     mirror()
     {
-        if (symetric_)
+        if (symmetric_)
             return;
 
-        for (std::size_t y = 0; y < size(); y++) {
-            for (std::size_t x = 0; x < (size() / 2); x++) {
+        for (size_type y = 0; y < size(); y++) {
+            for (size_type x = 0; x < (size() / 2); x++) {
                 std::swap(board_[y][x], board_[y][size() - x - 1]);
             }
         }
     }
 
 public:
-    const matrix_type &
-    board() const
-    {
-        return board_;
-    }
-
-public:
     static piece
     create_l()
     {
-        static piece p({{
+        static piece pc(matrix_type({
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 1, 0, 0 },
                 { 0, 0, 1, 0, 0 },
                 { 0, 0, 1, 1, 0 },
                 { 0, 0, 0, 0, 0 },
-                }});
-        return p;
+                }));
+        return pc;
     }
 
     static piece
     create_o()
     {
-        static piece p({{
+        static piece pc(matrix_type{{
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 1, 1, 0 },
                 { 0, 0, 1, 1, 0 },
                 { 0, 0, 0, 0, 0 },
                 }}, true);
-        return p;
+        return pc;
     }
 
     static piece
     create_z()
     {
-        static piece p({{
+        static piece pc(matrix_type{{
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 1, 0 },
                 { 0, 0, 1, 1, 0 },
                 { 0, 0, 1, 0, 0 },
                 { 0, 0, 0, 0, 0 },
                 }});
-        return p;
+        return pc;
     }
 
     static piece
     create_t()
     {
-        static piece p({{
+        static piece pc(matrix_type{{
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 1, 0, 0 },
                 { 0, 0, 1, 1, 0 },
                 { 0, 0, 1, 0, 0 },
                 { 0, 0, 0, 0, 0 },
                 }});
-        return p;
+        return pc;
     }
 
     static piece
     create_i()
     {
-        static piece p({{
+        static piece pc(matrix_type{{
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0 },
                 { 0, 1, 1, 1, 1 },
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0 },
                 }});
-        return p;
+        return pc;
     }
 
 };

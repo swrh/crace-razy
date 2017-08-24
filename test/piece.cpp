@@ -15,24 +15,19 @@ BOOST_AUTO_TEST_CASE(test_case_o)
     piece left(piece::create_o());
     piece right(piece::create_o());
 
-    const piece::matrix_type &left_board = left.board();
-    const piece::matrix_type &right_board = right.board();
-
     for (int i = 0; i < 4; i++) {
         right.rotate();
 
-        for (std::size_t y = 0; y < left.size(); y++) {
-            const piece::line_type &left_line = left_board.at(y);
-            const piece::line_type &right_line = right_board.at(y);
-            BOOST_REQUIRE_EQUAL_COLLECTIONS(left_line.begin(), left_line.end(), right_line.begin(), right_line.end());
+        for (piece::size_type y = 0; y < left.size(); y++) {
+            BOOST_REQUIRE_EQUAL_COLLECTIONS(left.at(y).begin(), left.at(y).end(),
+                    right.at(y).begin(), right.at(y).end());
         }
 
         right.mirror();
 
-        for (std::size_t y = 0; y < left.size(); y++) {
-            const piece::line_type &left_line = left_board.at(y);
-            const piece::line_type &right_line = right_board.at(y);
-            BOOST_REQUIRE_EQUAL_COLLECTIONS(left_line.begin(), left_line.end(), right_line.begin(), right_line.end());
+        for (piece::size_type y = 0; y < left.size(); y++) {
+            BOOST_REQUIRE_EQUAL_COLLECTIONS(left.at(y).begin(), left.at(y).end(),
+                    right.at(y).begin(), right.at(y).end());
         }
     }
 }
@@ -47,9 +42,9 @@ BOOST_AUTO_TEST_CASE(test_case_lzti)
     }};
 
     for (auto &pc : lzti) {
-        for (std::size_t y = 0; y < pc.size(); y++) {
-            const piece::line_type &current = pc.board().at(y);
-            const piece::line_type &opposite = pc.board().at(pc.size() - y - 1);
+        for (piece::size_type y = 0; y < pc.size(); y++) {
+            const piece::line_type &current = pc.at(y);
+            const piece::line_type &opposite = pc.at(pc.size() - y - 1);
 
             piece::line_type copy(current);
 
@@ -83,43 +78,38 @@ BOOST_AUTO_TEST_CASE(test_case_lzti_simpler)
         { piece::create_i(), piece::create_i(), },
     }};
 
-    const std::size_t size = piece::size();
-
     for (auto &pieces : lzti) {
         piece &left = pieces.at(0);
         piece &right = pieces.at(1);
 
-        const piece::matrix_type &left_board = left.board();
-        const piece::matrix_type &right_board = right.board();
-
-        for (std::size_t y = 0; y < size; y++) {
-            const piece::line_type &left_line = left_board.at(y);
-            const piece::line_type &right_line = right_board.at(y);
+        for (piece::size_type y = 0; y < left.size(); y++) {
+            const piece::line_type &left_line = left.at(y);
+            const piece::line_type &right_line = right.at(y);
             BOOST_REQUIRE_EQUAL_COLLECTIONS(left_line.begin(), left_line.end(), right_line.begin(), right_line.end());
         }
 
         right.mirror();
 
-        for (std::size_t y = 0; y < size; y++) {
-            const piece::line_type &left_line = left_board.at(y);
-            const piece::line_type &right_line = right_board.at(y);
+        for (piece::size_type y = 0; y < left.size(); y++) {
+            const piece::line_type &left_line = left.at(y);
+            const piece::line_type &right_line = right.at(y);
             BOOST_REQUIRE_EQUAL_COLLECTIONS(left_line.begin(), left_line.end(), right_line.rbegin(), right_line.rend());
         }
 
         right.rotate();
         right.rotate();
 
-        for (std::size_t y = 0; y < size; y++) {
-            const piece::line_type &left_line = left_board.at(y);
-            const piece::line_type &right_line = right_board.at(size - y - 1);
+        for (piece::size_type y = 0; y < left.size(); y++) {
+            const piece::line_type &left_line = left.at(y);
+            const piece::line_type &right_line = right.at(left.size() - y - 1);
             BOOST_REQUIRE_EQUAL_COLLECTIONS(left_line.begin(), left_line.end(), right_line.begin(), right_line.end());
         }
 
         right.mirror();
 
-        for (std::size_t y = 0; y < size; y++) {
-            const piece::line_type &left_line = left_board.at(y);
-            const piece::line_type &right_line = right_board.at(size - y - 1);
+        for (piece::size_type y = 0; y < left.size(); y++) {
+            const piece::line_type &left_line = left.at(y);
+            const piece::line_type &right_line = right.at(left.size() - y - 1);
             BOOST_REQUIRE_EQUAL_COLLECTIONS(left_line.begin(), left_line.end(), right_line.rbegin(), right_line.rend());
         }
 
