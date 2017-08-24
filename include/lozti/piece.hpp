@@ -2,6 +2,7 @@
 #define _LOZTI_PIECE_HPP_
 
 #include <algorithm>
+#include <array>
 #include <stdexcept>
 #include <vector>
 
@@ -55,13 +56,15 @@ public:
         if (symmetric_)
             return;
 
-        for (size_type y = 0; y < (size() / 2); y++) {
-            for (size_type x = y; x < (size() - y - 1); x++) {
+        size_type sz = size();
+
+        for (size_type y = 0; y < (sz / 2); y++) {
+            for (size_type x = y; x < (sz - y - 1); x++) {
                 data_type t = board_[y][x];
 
-                std::swap(t, board_[x][size() - y - 1]);
-                std::swap(t, board_[size() - y - 1][size() - x - 1]);
-                std::swap(t, board_[size() - x - 1][y]);
+                std::swap(t, board_[x][sz - y - 1]);
+                std::swap(t, board_[sz - y - 1][sz - x - 1]);
+                std::swap(t, board_[sz - x - 1][y]);
                 std::swap(t, board_[y][x]);
             }
         }
@@ -73,9 +76,11 @@ public:
         if (symmetric_)
             return;
 
-        for (size_type y = 0; y < size(); y++) {
-            for (size_type x = 0; x < (size() / 2); x++) {
-                std::swap(board_[y][x], board_[y][size() - x - 1]);
+        size_type sz = size();
+
+        for (size_type y = 0; y < sz; y++) {
+            for (size_type x = 0; x < (sz / 2); x++) {
+                std::swap(board_[y][x], board_[y][sz - x - 1]);
             }
         }
     }
@@ -143,6 +148,30 @@ public:
                 { 0, 0, 0, 0, 0 },
                 { 0, 0, 0, 0, 0 },
                 }});
+        return pc;
+    }
+
+public:
+    static piece
+    create_random()
+    {
+        static std::array<piece, 5> pieces({{
+                create_l(), create_o(), create_z(), create_t(), create_i(),
+                }});
+        unsigned int seed = static_cast<unsigned int>(time(NULL));
+
+        auto &pc = pieces.at(rand_r(&seed) % pieces.size());
+
+        unsigned int n;
+
+        n = rand_r(&seed) % 4;
+        while (n-- > 0)
+            pc.rotate();
+
+        n = rand_r(&seed) % 2;
+        while (n-- > 0)
+            pc.mirror();
+
         return pc;
     }
 
