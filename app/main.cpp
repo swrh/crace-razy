@@ -1,11 +1,14 @@
 #include <err.h>
 #include <stdlib.h>
 
+#include <iostream>
 #include <stdexcept>
 
-#include <SDL.h>
+#include <boost/program_options.hpp>
 
 using namespace std;
+
+namespace po = boost::program_options;
 
 static void
 run()
@@ -15,21 +18,36 @@ run()
 int
 main(int argc, char *argv[])
 {
-    if (SDL_Init(SDL_INIT_VIDEO) != 0)
-        errx(EXIT_FAILURE, "error initializing sdl: %s", SDL_GetError());
+    // Declare the supported options.
+    po::options_description desc("Allowed options");
+    desc.add_options()
+        ("help", "produce help message")
+        ("compression", po::value<int>(), "set compression level")
+    ;
 
-    int exit_code = EXIT_SUCCESS;
+    po::variables_map vm;
+    po::store(po::parse_command_line(argc, argv, desc), vm);
+    po::notify(vm);
+
+    if (vm.count("help")) {
+        cout << desc << endl;
+        return EXIT_FAILURE;
+    }
+
+    if (vm.count("compression")) {
+        cout << "Compression level was set to " << vm["compression"].as<int>() << "." << endl;
+    } else {
+        cout << "Compression level was not set." << endl;
+    }
 
     try {
         run();
     } catch (exception &e) {
         warnx("unhandled exception: %s", e.what());
-        exit_code = EXIT_FAILURE;
+        return EXIT_FAILURE;
     }
 
-    SDL_Quit();
-
-    return exit_code;
+    return EXIT_SUCCESS;
 }
 
 // vim:set sw=4 ts=4 et tw=120:
