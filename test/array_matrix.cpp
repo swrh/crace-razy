@@ -3,19 +3,18 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <lozti/matrix.hpp>
+#include <lozti/array_matrix.hpp>
 
 using namespace std;
 using std::array;
 
-using lozti::matrix;
-using lozti::make_matrix;
+using lozti::make_array_matrix;
 
 BOOST_AUTO_TEST_SUITE(test_suite_matrix)
 
 BOOST_AUTO_TEST_CASE(test_case)
 {
-    auto m = make_matrix<int, 5, 3>();
+    auto m = make_array_matrix<int, 5, 3>();
 
     std::size_t i = 0;
     for (std::size_t y = 0; y < m.height(); ++y) {

@@ -1,5 +1,5 @@
-#if !defined(_LOZTI_MATRIX_HPP_)
-#define _LOZTI_MATRIX_HPP_
+#if !defined(_LOZTI_ARRAY_MATRIX_HPP_)
+#define _LOZTI_ARRAY_MATRIX_HPP_
 
 #include <array>
 #include <stdexcept>
@@ -9,7 +9,7 @@
 namespace lozti {
 
 template <typename T, std::size_t S> class
-matrix
+array_matrix
 {
 public:
     typedef std::size_t size_type;
@@ -17,29 +17,28 @@ public:
     typedef std::array<value_type, S> container_type;
 
 private:
-    const size_type size_ = S;
     size_type width_, height_;
 
     container_type data_;
 
 public:
-    matrix(size_type width = 1)
-        : width_(width)
+    array_matrix(size_type w = 1)
+        : width_(w)
     {
-        if (size_ == 0)
-            throw std::logic_error("invalid matrix size");
+        if (data_.size() == 0)
+            throw std::logic_error("invalid size");
 
-        if (width_ <= 0 || (size_ % width_) != 0)
+        if (width_ <= 0 || (data_.size() % width_) != 0)
             throw std::logic_error("invalid width");
 
-        height_ = size_ / width_;
+        height_ = data_.size() / width_;
     }
 
 public:
     size_type
     size() const
     {
-        return size_;
+        return data_.size();
     }
 
     size_type
@@ -83,14 +82,14 @@ public:
     void
     transpose()
     {
-        std::vector<bool> visited(size_);
+        std::vector<bool> visited(data_.size());
         for (typename container_type::iterator it = data_.begin() + 1; it != data_.end(); ++it) {
             size_type i = it - data_.begin();
             if (visited[i])
                 continue;
             do  {
-                if (i != (size_ - 1))
-                    i = (height_ * i) % (size_ - 1);
+                if (i != (data_.size() - 1))
+                    i = (height_ * i) % (data_.size() - 1);
                 std::swap(*(data_.begin() + i), *it);
                 visited[i] = true;
             } while ((data_.begin() + i) != it);
@@ -99,26 +98,26 @@ public:
     }
 
     bool
-    resize(size_type width, size_type height)
+    resize(size_type w, size_type h)
     {
-        if ((width * height) != size_)
+        if ((w * h) != data_.size())
             return false;
 
-        width_ = width;
-        height_ = height;
+        width_ = w;
+        height_ = h;
         return true;
     }
 
 };
 
-template <typename T, std::size_t W, std::size_t H> matrix<T, W * H>
-make_matrix()
+template <typename T, std::size_t W, std::size_t H> array_matrix<T, W * H>
+make_array_matrix()
 {
-    return matrix<T, W * H>(W);
+    return array_matrix<T, W * H>(W);
 }
 
 }
 
-#endif // !defined(_LOZTI_MATRIX_HPP_)
+#endif // !defined(_LOZTI_ARRAY_MATRIX_HPP_)
 
 // vim:set sw=4 ts=4 et tw=120:
