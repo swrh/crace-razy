@@ -1,20 +1,20 @@
-#if !defined(_LOZTI_ARRAY_MATRIX_HPP_)
-#define _LOZTI_ARRAY_MATRIX_HPP_
+#if !defined(_LOZTI_VECTOR_MATRIX_HPP_)
+#define _LOZTI_VECTOR_MATRIX_HPP_
 
-#include <array>
+#include <vector>
 #include <stdexcept>
 #include <utility>
 #include <vector>
 
 namespace lozti {
 
-template <typename T, std::size_t S> class
-array_matrix
+template <typename T> class
+vector_matrix
 {
 public:
     typedef std::size_t size_type;
     typedef T value_type;
-    typedef std::array<value_type, S> container_type;
+    typedef std::vector<value_type> container_type;
     typedef typename container_type::iterator iterator;
 
 private:
@@ -22,16 +22,11 @@ private:
     size_type width_, height_;
 
 public:
-    array_matrix(size_type w = 1)
-        : width_(w)
+    vector_matrix(size_type w, size_type h)
+        : data_(w * h), width_(w), height_(h)
     {
         if (data_.size() == 0)
-            throw std::logic_error("invalid size");
-
-        if (width_ <= 0 || (data_.size() % width_) != 0)
-            throw std::logic_error("invalid width");
-
-        height_ = data_.size() / width_;
+            throw std::logic_error("invalid width/height");
     }
 
 public:
@@ -100,22 +95,21 @@ public:
     void
     resize(size_type w, size_type h)
     {
-        if ((w * h) != data_.size())
-            throw std::logic_error("invalid size");
+        data_.resize(w * h);
         width_ = w;
         height_ = h;
     }
 
 };
 
-template <typename T, std::size_t W, std::size_t H> array_matrix<T, W * H>
-make_array_matrix()
+template <typename T> vector_matrix<T>
+make_vector_matrix(typename vector_matrix<T>::size_type w, typename vector_matrix<T>::size_type h)
 {
-    return array_matrix<T, W * H>(W);
+    return vector_matrix<T>(w, h);
 }
 
 }
 
-#endif // !defined(_LOZTI_ARRAY_MATRIX_HPP_)
+#endif // !defined(_LOZTI_VECTOR_MATRIX_HPP_)
 
 // vim:set sw=4 ts=4 et tw=120:

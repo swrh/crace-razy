@@ -4,18 +4,18 @@
 #include <boost/test/unit_test.hpp>
 
 #include <lozti/algorithm.hpp>
-#include <lozti/array_matrix.hpp>
+#include <lozti/vector_matrix.hpp>
 
 using namespace std;
 
-using lozti::make_array_matrix;
+using lozti::make_vector_matrix;
 using lozti::transpose;
 
-BOOST_AUTO_TEST_SUITE(test_suite_array_matrix)
+BOOST_AUTO_TEST_SUITE(test_suite_vector_matrix)
 
 BOOST_AUTO_TEST_CASE(test_case)
 {
-    auto m = make_array_matrix<int, 5, 3>();
+    auto m = make_vector_matrix<int>(5, 3);
 
     std::size_t i = 0;
     for (std::size_t y = 0; y < m.height(); ++y) {
