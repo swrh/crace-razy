@@ -1,7 +1,6 @@
 #if !defined(_LOZTI_VECTOR_MATRIX_HPP_)
 #define _LOZTI_VECTOR_MATRIX_HPP_
 
-#include <vector>
 #include <stdexcept>
 #include <utility>
 #include <vector>
@@ -29,7 +28,39 @@ public:
             throw std::logic_error("invalid width/height");
     }
 
+    vector_matrix(const vector_matrix<T> &other)
+        : data_(other.data_), width_(other.width_), height_(other.height_)
+    {
+    }
+
+    vector_matrix(vector_matrix<T> &&other)
+        : data_(other.data_), width_(other.width_), height_(other.height_)
+    {
+        other.width_ = 0;
+        other.height_ = 0;
+    }
+
 public:
+    vector_matrix<T> &
+    operator=(const vector_matrix<T> &other)
+    {
+        if (this == &other)
+            return *this;
+        data_ = other.data_;
+        width_ = other.width_;
+        height_ = other.height_;
+        return *this;
+    }
+
+    vector_matrix<T> &
+    operator=(vector_matrix<T> &&other)
+    {
+        if (this == &other)
+            return *this;
+        std::swap(*this, other);
+        return *this;
+    }
+
     value_type &
     operator[](size_type i)
     {
@@ -100,6 +131,14 @@ public:
         height_ = h;
     }
 
+public:
+    friend void
+    swap(vector_matrix<T> &left, vector_matrix<T> &right)
+    {
+        std::swap(left.data_, right.data_);
+        std::swap(left.width_, right.width_);
+        std::swap(left.height_, right.height_);
+    }
 };
 
 template <typename T> vector_matrix<T>

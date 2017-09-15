@@ -2,9 +2,9 @@
 #define _LOZTI_ARRAY_MATRIX_HPP_
 
 #include <array>
+#include <functional>
 #include <stdexcept>
 #include <utility>
-#include <vector>
 
 namespace lozti {
 
@@ -34,7 +34,28 @@ public:
         height_ = data_.size() / width_;
     }
 
+    array_matrix(const array_matrix<T, S> &other)
+        : data_(other.data_), width_(other.width_), height_(other.height_)
+    {
+    }
+
+    array_matrix(array_matrix<T, S> &&other)
+        : data_(other.data_), width_(std::ref(other.width_)), height_(std::ref(other.height_))
+    {
+    }
+
 public:
+    array_matrix<T, S> &
+    operator=(const array_matrix<T, S> &other)
+    {
+        if (this == &other)
+            return *this;
+        data_ = other.data_;
+        width_ = other.width_;
+        height_ = other.height_;
+        return *this;
+    }
+
     value_type &
     operator[](size_type i)
     {
@@ -106,6 +127,14 @@ public:
         height_ = h;
     }
 
+public:
+    friend void
+    swap(array_matrix<T, S> &left, array_matrix<T, S> &right)
+    {
+        std::swap(left.data_, right.data_);
+        std::swap(left.width_, right.width_);
+        std::swap(left.height_, right.height_);
+    }
 };
 
 template <typename T, std::size_t W, std::size_t H> array_matrix<T, W * H>

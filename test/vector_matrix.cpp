@@ -9,38 +9,44 @@
 using namespace std;
 
 using lozti::make_vector_matrix;
-using lozti::transpose;
 
 BOOST_AUTO_TEST_SUITE(test_suite_vector_matrix)
 
 BOOST_AUTO_TEST_CASE(test_case)
 {
+    std::size_t i;
     auto m = make_vector_matrix<int>(5, 3);
 
-    std::size_t i = 0;
+    i = 0;
     for (std::size_t y = 0; y < m.height(); ++y) {
         for (std::size_t x = 0; x < m.width(); ++x) {
-            m(x, y) = i++;
+            m.at(x, y) = i++;
         }
     }
 
+    auto n = m;
+
+    i = 0;
     for (std::size_t y = 0; y < m.height(); ++y) {
         for (std::size_t x = 0; x < m.width(); ++x) {
-            cout << " " << setw(3) << m(x, y);
+            BOOST_REQUIRE_EQUAL(m.at(x, y), i++);
         }
-        cout << endl;
     }
-    cout << endl;
 
-    transpose(m);
+    for (std::size_t y = m.height(); y > 0; --y) {
+        for (std::size_t x = m.width(); x > 0; --x) {
+            BOOST_REQUIRE_EQUAL(m.at(x - 1, y - 1), --i);
+        }
+    }
+
+    BOOST_REQUIRE_EQUAL(m.width(), n.width());
+    BOOST_REQUIRE_EQUAL(m.height(), n.height());
 
     for (std::size_t y = 0; y < m.height(); ++y) {
         for (std::size_t x = 0; x < m.width(); ++x) {
-            cout << " " << setw(3) << m(x, y);
+            BOOST_REQUIRE_EQUAL(m.at(x, y), n.at(x, y));
         }
-        cout << endl;
     }
-    cout << endl;
 }
 
 BOOST_AUTO_TEST_SUITE_END()
