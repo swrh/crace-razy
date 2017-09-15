@@ -1,10 +1,30 @@
 #if !defined(_LOZTI_ALGORITHM_HPP_)
 #define _LOZTI_ALGORITHM_HPP_
 
+#include <algorithm>
 #include <utility>
 #include <vector>
 
 namespace lozti {
+
+template <typename T> void
+flip_lr(T &matrix)
+{
+    const typename T::size_type width = matrix.width();
+    const typename T::size_type height = matrix.height();
+    for (typename T::size_type y = 0; y < height; ++y)
+        std::reverse(&matrix[y * width], &matrix[(y + 1) * width]);
+}
+
+template <typename T> void
+flip_ud(T &matrix)
+{
+    const typename T::size_type width = matrix.width();
+    const typename T::size_type height = matrix.height();
+    for (typename T::size_type x = 0; x < width; ++x)
+        for (typename T::size_type y = 0; y < (height / 2); ++y)
+            std::swap(matrix(x, y), matrix(x, height - y - 1));
+}
 
 template <typename T> void
 transpose(T &matrix)

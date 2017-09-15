@@ -8,6 +8,8 @@
 
 using namespace std;
 
+using lozti::flip_lr;
+using lozti::flip_ud;
 using lozti::transpose;
 
 using lozti::vector_matrix;
@@ -30,6 +32,34 @@ F
         n = m;
     }
 };
+
+BOOST_FIXTURE_TEST_CASE(test_case_flip_lr, F)
+{
+    flip_lr(n);
+
+    BOOST_REQUIRE_EQUAL(m.width(), n.width());
+    BOOST_REQUIRE_EQUAL(m.height(), n.height());
+
+    for (std::size_t y = 0; y < m.height(); ++y) {
+        for (std::size_t x = 0; x < m.width(); ++x) {
+            BOOST_REQUIRE_EQUAL(m.at(x, y), n.at(n.width() - x - 1, y));
+        }
+    }
+}
+
+BOOST_FIXTURE_TEST_CASE(test_case_flip_ud, F)
+{
+    flip_ud(n);
+
+    BOOST_REQUIRE_EQUAL(m.width(), n.width());
+    BOOST_REQUIRE_EQUAL(m.height(), n.height());
+
+    for (std::size_t y = 0; y < m.height(); ++y) {
+        for (std::size_t x = 0; x < m.width(); ++x) {
+            BOOST_REQUIRE_EQUAL(m.at(x, y), n.at(x, n.height() - y - 1));
+        }
+    }
+}
 
 BOOST_FIXTURE_TEST_CASE(test_case_transpose, F)
 {
