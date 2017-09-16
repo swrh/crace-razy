@@ -13,19 +13,22 @@ using lozti::block;
 using lozti::flip_lr;
 using lozti::transpose;
 
-static vector<block::matrix_type>
-rotates(block::matrix_type matrix)
+/**
+ * Rotate the input matrix and return all possible positions in a container.
+ */
+template <template <class ...> class V, class T> static V<T>
+rotates(T matrix)
 {
-    vector<block::matrix_type> matrices;
+    V<T> ret;
 
-    unsigned int i = 0;
+    unsigned int n = 0;
     for (;;) {
-        if (find(matrices.begin(), matrices.end(), matrix) != matrices.end())
+        if (find(ret.begin(), ret.end(), matrix) != ret.end())
             break;
 
-        matrices.push_back(matrix);
+        ret.push_back(matrix);
 
-        if (++i >= 4)
+        if (++n >= 4)
             break;
 
         // Rotate CCW.
@@ -33,7 +36,7 @@ rotates(block::matrix_type matrix)
         transpose(matrix);
     }
 
-    return matrices;
+    return ret;
 }
 
 block::const_iterator::const_iterator(const block &b)
@@ -76,7 +79,7 @@ block::const_iterator::operator--()
 }
 
 block::block(const matrix_type &matrix)
-    : matrices(rotates(matrix))
+    : matrices(rotates<vector>(matrix))
 {
 }
 
