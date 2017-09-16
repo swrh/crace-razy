@@ -39,23 +39,29 @@ rotates(T matrix)
     return ret;
 }
 
-block::const_iterator::const_iterator(const block &b)
+block::iterator::iterator(const block &b)
     : block_(b)
 {
 }
 
-const block::matrix_type &
-block::const_iterator::operator*() const
+const block::matrix_type *
+block::iterator::operator->() const
 {
-    return block_.at(n);
+    return &block_[n];
 }
 
-block::const_iterator &
-block::const_iterator::operator++()
+const block::matrix_type &
+block::iterator::operator*() const
+{
+    return block_[n];
+}
+
+block::iterator &
+block::iterator::operator++()
 {
     size_type size = block_.size();
 
-    if (size <= 0 || n >= size)
+    if (size <= 0 || n >= (size - 1))
         n = 0;
     else
         ++n;
@@ -63,8 +69,8 @@ block::const_iterator::operator++()
     return *this;
 }
 
-block::const_iterator &
-block::const_iterator::operator--()
+block::iterator &
+block::iterator::operator--()
 {
     size_type size = block_.size();
 
@@ -83,6 +89,12 @@ block::block(const matrix_type &matrix)
 {
 }
 
+const block::matrix_type &
+block::operator[](size_type n) const
+{
+    return matrices[n];
+}
+
 block::size_type
 block::size() const
 {
@@ -95,10 +107,10 @@ block::at(size_type n) const
     return matrices.at(n);
 }
 
-block::const_iterator
+block::iterator
 block::iterate() const
 {
-    return const_iterator(*this);
+    return iterator(*this);
 }
 
 // vim:set sw=4 ts=4 et tw=120:

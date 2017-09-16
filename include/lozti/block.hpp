@@ -20,27 +20,30 @@ private:
 
 public:
     class
-    const_iterator
+    iterator
     {
     private:
         const block &block_;
         size_type n = 0;
 
     public:
-        const_iterator(const block &b);
+        iterator(const block &b);
 
+        const matrix_type *operator->() const;
         const matrix_type &operator*() const;
-        const_iterator &operator++();
-        const_iterator &operator--();
+        iterator &operator++();
+        iterator &operator--();
     };
 
 public:
     block(const matrix_type &m);
 
 public:
+    const matrix_type &operator[](size_type n) const;
+
     size_type size() const;
     const matrix_type &at(size_type n) const;
-    const_iterator iterate() const;
+    iterator iterate() const;
 };
 
 }

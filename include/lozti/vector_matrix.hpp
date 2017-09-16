@@ -1,6 +1,7 @@
 #if !defined(_LOZTI_VECTOR_MATRIX_HPP_)
 #define _LOZTI_VECTOR_MATRIX_HPP_
 
+#include <ostream>
 #include <stdexcept>
 #include <utility>
 #include <vector>
@@ -146,6 +147,26 @@ public:
         std::swap(left.data_, right.data_);
         std::swap(left.width_, right.width_);
         std::swap(left.height_, right.height_);
+    }
+
+public:
+    friend std::ostream &
+    operator<<(std::ostream &out, const vector_matrix &m)
+    {
+        out << "(";
+        for (size_type y = 0; y < m.height(); ++y) {
+            if (y != 0)
+                out << ", ";
+            out << "(";
+            for (size_type x = 0; x < m.width(); ++x) {
+                if (x != 0)
+                    out << ", ";
+                out << m.data_[y * m.width() + x];
+            }
+            out << ")";
+        }
+        out << ")";
+        return out;
     }
 };
 
