@@ -61,6 +61,14 @@ public:
         return *this;
     }
 
+    bool
+    operator==(const vector_matrix<T> &other) const
+    {
+        return (width_ == other.width_) &&
+            (height_ == other.height_) &&
+            (data_ == other.data_);
+    }
+
     value_type &
     operator[](size_type i)
     {

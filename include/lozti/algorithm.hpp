@@ -7,13 +7,25 @@
 
 namespace lozti {
 
+template <class Distance, class InputIt> constexpr void
+advances(Distance n, InputIt &it)
+{
+    std::advance(it, n);
+}
+
+template <class Distance, class InputIt, class ...InputIts> constexpr void
+advances(Distance n, InputIt &it, InputIts &...its)
+{
+    advances(n, it);
+    advances(n, its...);
+}
+
 template <typename T> void
 flip_lr(T &matrix)
 {
     const typename T::size_type width = matrix.width();
-    const typename T::size_type height = matrix.height();
-    for (typename T::size_type y = 0; y < height; ++y)
-        std::reverse(&matrix[y * width], &matrix[(y + 1) * width]);
+    for (auto cur = matrix.begin(), next = cur + width; cur != matrix.end(); advances(width, cur, next))
+        std::reverse(cur, next);
 }
 
 template <typename T> void
@@ -30,6 +42,7 @@ template <typename T> void
 transpose(T &matrix)
 {
     const typename T::size_type size = matrix.size();
+    const typename T::size_type height = matrix.height();
     std::vector<bool> visited(size);
     for (typename T::size_type i = 1; i < size; ++i) {
         if (visited[i])
@@ -37,14 +50,15 @@ transpose(T &matrix)
         typename T::size_type j = i;
         for (;;) {
             if (j != (size - 1))
-                j = (matrix.height() * j) % (size - 1);
+                j = (height * j) % (size - 1);
             if (j == i)
                 break;
-            std::swap(matrix[j], matrix[i]);
+            // Can't use swap(T::operator[]) if T is a bitset (vector<bool>), so... use random access iterators.
+            std::iter_swap(matrix.begin() + j, matrix.begin() + i);
             visited[j] = true;
         }
     }
-    matrix.resize(matrix.height(), matrix.width());
+    matrix.resize(height, matrix.width());
 }
 
 }
