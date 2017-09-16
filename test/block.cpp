@@ -14,28 +14,34 @@ BOOST_AUTO_TEST_SUITE(test_suite_block)
 
 BOOST_AUTO_TEST_CASE(test_case)
 {
-    vector_matrix<bool> l(1, 4);
+    block::matrix_type p0(1, 4);
 
-    fill(l.begin(), l.end(), true);
+    fill(p0.begin(), p0.end(), true);
 
-    block bl(l);
+    block bl(p0);
 
     BOOST_REQUIRE_EQUAL(bl.size(), 2);
 
-    block::iterator bli = bl.iterate();
+    block::iterator it = bl.iterate();
 
-    BOOST_REQUIRE_EQUAL(bl.at(0), *bli);
-    BOOST_REQUIRE_NE(bl.at(1), *bli);
+    BOOST_REQUIRE_EQUAL(p0.size(), it->size());
+    BOOST_REQUIRE_EQUAL(bl.at(0), *it);
+    BOOST_REQUIRE_NE(bl.at(1), *it);
+    BOOST_REQUIRE_EQUAL(p0, *it);
 
-    ++bli;
+    ++it;
 
-    BOOST_REQUIRE_NE(bl.at(0), *bli);
-    BOOST_REQUIRE_EQUAL(bl.at(1), *bli);
+    BOOST_REQUIRE_EQUAL(p0.size(), it->size());
+    BOOST_REQUIRE_NE(bl.at(0), *it);
+    BOOST_REQUIRE_EQUAL(bl.at(1), *it);
+    BOOST_REQUIRE_NE(p0, *it);
 
-    ++bli;
+    ++it;
 
-    BOOST_REQUIRE_EQUAL(bl.at(0), *bli);
-    BOOST_REQUIRE_NE(bl.at(1), *bli);
+    BOOST_REQUIRE_EQUAL(p0.size(), it->size());
+    BOOST_REQUIRE_EQUAL(bl.at(0), *it);
+    BOOST_REQUIRE_NE(bl.at(1), *it);
+    BOOST_REQUIRE_EQUAL(p0, *it);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
