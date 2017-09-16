@@ -22,7 +22,7 @@ add_executable (lozti-test
 
 target_link_libraries (lozti-test PUBLIC
     ${Boost_LIBRARIES}
-    lozti-common
+    lozti-core
     )
 
 target_include_directories (lozti-test PUBLIC

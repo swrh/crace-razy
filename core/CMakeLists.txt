@@ -1,4 +1,4 @@
-# common/CMakeLists.txt
+# core/CMakeLists.txt
 
 cmake_minimum_required (VERSION 3.1 FATAL_ERROR)
 
@@ -17,21 +17,21 @@ file (GLOB_RECURSE SOURCES
     ./*.hpp
     )
 
-add_library (lozti-common SHARED
+add_library (lozti-core SHARED
     ${SOURCES}
     )
 
-target_link_libraries (lozti-common PUBLIC
+target_link_libraries (lozti-core PUBLIC
     ${Boost_LIBRARIES}
     )
 
-target_include_directories (lozti-common PUBLIC
+target_include_directories (lozti-core PUBLIC
     ${Boost_INCLUDE_DIRS}
     ${CMAKE_CURRENT_BINARY_DIR}
     ../include
     )
 
-target_compile_options (lozti-common PUBLIC
+target_compile_options (lozti-core PUBLIC
     ${Boost_CFLAGS_OTHER}
     )
 
