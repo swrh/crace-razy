@@ -22,19 +22,36 @@ private:
     size_type width_, height_;
 
 public:
+    vector_matrix()
+        : width_(0), height_(0)
+    {
+    }
+
     vector_matrix(size_type w, size_type h)
         : data_(w * h), width_(w), height_(h)
     {
-        if (data_.size() == 0)
-            throw std::logic_error("invalid width/height");
     }
 
-    vector_matrix(const vector_matrix<T> &other)
+    vector_matrix(size_type w, size_type h, const container_type &d)
+        : data_(d), width_(w), height_(h)
+    {
+        if (data_.size() != (width_ * height_))
+            throw std::runtime_error("invalid width/height");
+    }
+
+    vector_matrix(size_type w, size_type h, container_type &&d)
+        : data_(d), width_(w), height_(h)
+    {
+        if (data_.size() != (width_ * height_))
+            throw std::runtime_error("invalid width/height");
+    }
+
+    vector_matrix(const vector_matrix &other)
         : data_(other.data_), width_(other.width_), height_(other.height_)
     {
     }
 
-    vector_matrix(vector_matrix<T> &&other)
+    vector_matrix(vector_matrix &&other)
         : data_(other.data_), width_(other.width_), height_(other.height_)
     {
         other.width_ = 0;
@@ -42,8 +59,8 @@ public:
     }
 
 public:
-    vector_matrix<T> &
-    operator=(const vector_matrix<T> &other)
+    vector_matrix &
+    operator=(const vector_matrix &other)
     {
         if (this == &other)
             return *this;
@@ -53,8 +70,8 @@ public:
         return *this;
     }
 
-    vector_matrix<T> &
-    operator=(vector_matrix<T> &&other)
+    vector_matrix &
+    operator=(vector_matrix &&other)
     {
         if (this == &other)
             return *this;
@@ -63,7 +80,7 @@ public:
     }
 
     bool
-    operator==(const vector_matrix<T> &other) const
+    operator==(const vector_matrix &other) const
     {
         return (width_ == other.width_) &&
             (height_ == other.height_) &&
@@ -142,7 +159,7 @@ public:
 
 public:
     friend void
-    swap(vector_matrix<T> &left, vector_matrix<T> &right)
+    swap(vector_matrix &left, vector_matrix &right)
     {
         std::swap(left.data_, right.data_);
         std::swap(left.width_, right.width_);
@@ -150,6 +167,23 @@ public:
     }
 
 public:
+    friend bool
+    operator<(const vector_matrix &left, const vector_matrix &right)
+    {
+        const auto &ld = left.data_;
+        const auto &rd = right.data_;
+
+        if (ld.size() < rd.size())
+            return true;
+
+        for (auto l = ld.cbegin(), r = rd.cbegin(); l != ld.end() && r != rd.end(); ++l, ++r) {
+            if (*l < *r)
+                return true;
+        }
+
+        return false;
+    }
+
     friend std::ostream &
     operator<<(std::ostream &out, const vector_matrix &m)
     {

@@ -113,4 +113,30 @@ block::iterate() const
     return iterator(*this);
 }
 
+namespace lozti {
+
+bool
+operator<(const block &left, const block &right)
+{
+    const auto &lm = left.matrices;
+    const auto &rm = right.matrices;
+
+    if (lm.size() < rm.size())
+        return true;
+
+    for (auto l = lm.cbegin(), r = rm.cbegin(); l != lm.end() && r != rm.end(); ++l, ++r) {
+        if (l->size() < r->size())
+            return true;
+    }
+
+    for (auto l = lm.cbegin(), r = rm.cbegin(); l != lm.end() && r != rm.end(); ++l, ++r) {
+        if (*l < *r)
+            return true;
+    }
+
+    return false;
+}
+
+}
+
 // vim:set sw=4 ts=4 et tw=120:

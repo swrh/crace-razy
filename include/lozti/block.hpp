@@ -44,6 +44,8 @@ public:
     size_type size() const;
     const matrix_type &at(size_type n) const;
     iterator iterate() const;
+
+    friend bool operator<(const block &left, const block &right);
 };
 
 }
