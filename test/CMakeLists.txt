@@ -35,4 +35,6 @@ target_compile_options(lozti-test PUBLIC
     ${Boost_CFLAGS_OTHER}
     )
 
+add_test(all lozti-test)
+
 # vim:set sw=4 ts=4 et:
