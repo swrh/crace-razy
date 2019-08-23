@@ -1,4 +1,4 @@
-#include <lozti/vector_matrix.hpp>
+#include <lozti/core/vector_matrix.hpp>
 
 using lozti::vector_matrix;
 

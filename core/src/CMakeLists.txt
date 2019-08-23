@@ -1,9 +1,8 @@
-# app/CMakeLists.txt
+# core/src/CMakeLists.txt
 
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 find_package(Boost 1.54.0 REQUIRED COMPONENTS
-    program_options
     )
 
 file(GLOB_RECURSE SOURCES
@@ -12,23 +11,22 @@ file(GLOB_RECURSE SOURCES
     *.hpp
     )
 
-add_executable(lozti-app
+add_library(lozti-core SHARED
     ${SOURCES}
     )
 
-target_link_libraries(lozti-app
+target_link_libraries(lozti-core
     PUBLIC
         ${Boost_LIBRARIES}
-        lozti-core
     )
 
-target_include_directories(lozti-app
+target_include_directories(lozti-core
     PUBLIC
         ${Boost_INCLUDE_DIRS}
         ../include
     )
 
-target_compile_options(lozti-app
+target_compile_options(lozti-core
     PUBLIC
         ${Boost_CFLAGS_OTHER}
         ${Lozti_CFLAGS}

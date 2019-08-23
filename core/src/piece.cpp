@@ -1,4 +1,4 @@
-#include <lozti/piece.hpp>
+#include <lozti/core/piece.hpp>
 
 using lozti::piece;
 

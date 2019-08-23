@@ -2,8 +2,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <lozti/block.hpp>
-#include <lozti/vector_matrix.hpp>
+#include <lozti/core/block.hpp>
+#include <lozti/core/vector_matrix.hpp>
 
 using std::fill;
 

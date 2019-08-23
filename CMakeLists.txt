@@ -20,6 +20,5 @@ list(APPEND Lozti_CFLAGS -Wall -Werror)
 
 add_subdirectory(core)
 add_subdirectory(app)
-add_subdirectory(test)
 
 # vim:set sw=4 ts=4 et:

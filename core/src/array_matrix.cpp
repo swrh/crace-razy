@@ -1,4 +1,4 @@
-#include <lozti/array_matrix.hpp>
+#include <lozti/core/array_matrix.hpp>
 
 using lozti::array_matrix;
 

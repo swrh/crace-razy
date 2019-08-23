@@ -3,8 +3,8 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <lozti/algorithm.hpp>
-#include <lozti/vector_matrix.hpp>
+#include <lozti/core/algorithm.hpp>
+#include <lozti/core/vector_matrix.hpp>
 
 using namespace std;
 

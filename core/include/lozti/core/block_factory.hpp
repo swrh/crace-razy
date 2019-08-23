@@ -4,7 +4,7 @@
 #include <utility>
 #include <vector>
 
-#include <lozti/block.hpp>
+#include <lozti/core/block.hpp>
 
 namespace lozti {
 

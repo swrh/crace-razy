@@ -1,6 +1,6 @@
 #include <boost/test/unit_test.hpp>
 
-#include <lozti/logic.hpp>
+#include <lozti/core/logic.hpp>
 
 using std::array;
 

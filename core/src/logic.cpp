@@ -1,4 +1,4 @@
-#include <lozti/logic.hpp>
+#include <lozti/core/logic.hpp>
 
 using lozti::logic;
 

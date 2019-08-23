@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include <lozti/vector_matrix.hpp>
+#include <lozti/core/vector_matrix.hpp>
 
 namespace lozti {
 

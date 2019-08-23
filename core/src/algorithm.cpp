@@ -1,4 +1,4 @@
-#include <lozti/algorithm.hpp>
+#include <lozti/core/algorithm.hpp>
 
 using lozti::flip_lr;
 using lozti::flip_ud;

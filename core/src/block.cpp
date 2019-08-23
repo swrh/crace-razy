@@ -1,9 +1,9 @@
 #include <algorithm>
 #include <vector>
 
-#include <lozti/block.hpp>
+#include <lozti/core/block.hpp>
 
-#include <lozti/algorithm.hpp>
+#include <lozti/core/algorithm.hpp>
 
 using std::find;
 using std::vector;

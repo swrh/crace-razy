@@ -7,7 +7,7 @@
 
 #include <boost/optional.hpp>
 
-#include <lozti/piece.hpp>
+#include <lozti/core/piece.hpp>
 
 namespace lozti {
 

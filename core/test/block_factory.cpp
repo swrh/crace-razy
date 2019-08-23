@@ -2,7 +2,7 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include <lozti/block_factory.hpp>
+#include <lozti/core/block_factory.hpp>
 
 using lozti::block_factory;
 

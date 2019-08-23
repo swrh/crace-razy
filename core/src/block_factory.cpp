@@ -2,9 +2,9 @@
 #include <set>
 #include <stdexcept>
 
-#include <lozti/block_factory.hpp>
+#include <lozti/core/block_factory.hpp>
 
-#include <lozti/algorithm.hpp>
+#include <lozti/core/algorithm.hpp>
 
 using lozti::block_factory;
 
