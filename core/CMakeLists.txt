@@ -1,10 +1,6 @@
 # core/CMakeLists.txt
 
-cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
-
-# Enable C++11
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Werror")
+cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 find_package(Boost 1.54.0 REQUIRED COMPONENTS
     )
@@ -33,6 +29,7 @@ target_include_directories(lozti-core PUBLIC
 
 target_compile_options(lozti-core PUBLIC
     ${Boost_CFLAGS_OTHER}
+    ${Lozti_CFLAGS}
     )
 
 # vim:set sw=4 ts=4 et:
