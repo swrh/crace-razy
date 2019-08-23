@@ -22,7 +22,6 @@ main(int argc, char *argv[])
     po::options_description desc("Allowed options");
     desc.add_options()
         ("help", "produce help message")
-        ("compression", po::value<int>(), "set compression level")
     ;
 
     po::variables_map vm;
@@ -32,12 +31,6 @@ main(int argc, char *argv[])
     if (vm.count("help")) {
         cout << desc << endl;
         return EXIT_SUCCESS;
-    }
-
-    if (vm.count("compression")) {
-        cout << "Compression level was set to " << vm["compression"].as<int>() << "." << endl;
-    } else {
-        cout << "Compression level was not set." << endl;
     }
 
     try {
