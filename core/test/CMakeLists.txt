@@ -1,41 +1,47 @@
 # core/test/CMakeLists.txt
 
+set(modname "core")
+
 cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
 
 find_package(Boost 1.54.0 REQUIRED COMPONENTS
     unit_test_framework
     )
 
-file(GLOB_RECURSE SOURCES
-    ../include/*.hpp
-    *.cpp
-    *.hpp
+file(GLOB_RECURSE MAIN
     ../../test/*.cpp
     ../../test/*.hpp
     )
 
-add_executable(test-core
-    ${SOURCES}
-    )
+file(GLOB_RECURSE TESTS RELATIVE "${CMAKE_CURRENT_SOURCE_DIR}" *.cpp)
+foreach(testcpp ${TESTS})
+    get_filename_component(basename "${testcpp}" NAME_WE)
+    set(testname "test-${modname}-${basename}")
 
-target_link_libraries(test-core
-    PUBLIC
-        ${Boost_LIBRARIES}
-        lozti-core
-    )
+    add_executable("${testname}"
+        ${MAIN}
+        "${testcpp}"
+        )
 
-target_include_directories(test-core
-    PUBLIC
-        ${Boost_INCLUDE_DIRS}
-        ../include
-    )
+    target_link_libraries("${testname}"
+        PUBLIC
+            ${Boost_LIBRARIES}
+            "lozti-${modname}"
+        )
 
-target_compile_options(test-core
-    PUBLIC
-        ${Boost_CFLAGS_OTHER}
-        ${Lozti_CFLAGS}
-    )
+    target_include_directories("${testname}"
+        PUBLIC
+            ${Boost_INCLUDE_DIRS}
+            ../include
+        )
 
-add_test(core test-core)
+    target_compile_options("${testname}"
+        PUBLIC
+            ${Boost_CFLAGS_OTHER}
+            ${Lozti_CFLAGS}
+        )
+
+    add_test("${modname}-${basename}" "${testname}")
+endforeach()
 
 # vim:set sw=4 ts=4 et:
