@@ -31,7 +31,7 @@ main(int argc, char *argv[])
 
     if (vm.count("help")) {
         cout << desc << endl;
-        return EXIT_FAILURE;
+        return EXIT_SUCCESS;
     }
 
     if (vm.count("compression")) {
