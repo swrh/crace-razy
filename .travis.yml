@@ -1,20 +1,15 @@
 language: cpp
+os: linux
+dist: trusty
+compiler: gcc
 
-matrix:
-  include:
-    - os: linux
-      sudo: required
-      dist: trusty
-      compiler: gcc
-
-before_install:
-  - if [ $TRAVIS_OS_NAME == linux ]; then sudo apt-get -qq update && sudo apt-get install -y libboost-all-dev; fi
-
-before_script:
-  - mkdir build
-  - cd build
-  - cmake ..
+addons:
+  apt:
+    packages:
+      - libboost-all-dev
 
 script:
-  - make
-  - ctest
+  - mkdir -p build && cd build
+  - cmake -DCMAKE_BUILD_TYPE=Debug ..
+  - cmake --build . --config Debug -- -j $(nproc)
+  - ctest -j $(nproc) --output-on-failure
