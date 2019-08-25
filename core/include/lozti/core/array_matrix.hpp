@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <utility>
 
+#include <lozti/core/point.hpp>
 #include <lozti/core/types.hpp>
 
 namespace lozti {
@@ -138,6 +139,13 @@ public:
     at(size_type x, size_type y)
     {
         return data_.at(width_ * y + x);
+    }
+
+public:
+    value_type
+    value(const point &p) const
+    {
+        return data_[width_ * p.y() + p.x()];
     }
 
 public:

@@ -13,7 +13,7 @@ block::block(const block_data &data)
 {
 }
 
-const block_data::matrix_type &
+const block::matrix_type &
 block::matrix() const
 {
     return data_[n];
