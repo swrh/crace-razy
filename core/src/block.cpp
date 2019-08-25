@@ -10,8 +10,7 @@ using std::vector;
 
 using lozti::block;
 
-using lozti::flip_lr;
-using lozti::transpose;
+namespace lozti {
 
 /**
  * Rotate the input matrix and return all possible positions in a container.
@@ -112,8 +111,6 @@ block::iterate() const
 {
     return iterator(*this);
 }
-
-namespace lozti {
 
 bool
 operator<(const block &left, const block &right)

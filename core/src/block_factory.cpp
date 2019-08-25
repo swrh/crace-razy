@@ -8,8 +8,7 @@
 
 using lozti::block_factory;
 
-using lozti::block;
-using lozti::flip_lr;
+namespace lozti {
 
 block_factory::block_factory()
     : blocks(make_blocks())
@@ -137,6 +136,8 @@ block_factory::make_blocks()
     std::copy(unique_blocks.begin(), unique_blocks.end(), std::back_inserter(ret));
 
     return ret;
+}
+
 }
 
 // vim:set sw=4 ts=4 et tw=120:
