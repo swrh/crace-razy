@@ -3,6 +3,7 @@
 
 #include <cstddef>
 
+#include <lozti/core/types.hpp>
 #include <lozti/core/vector_matrix.hpp>
 
 namespace lozti {
@@ -11,7 +12,7 @@ class
 board
 {
 public:
-    typedef std::size_t size_type;
+    typedef lozti::size_type size_type;
     typedef bool value_type;
     typedef lozti::vector_matrix<value_type> container_type;
 

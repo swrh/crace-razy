@@ -6,13 +6,15 @@
 #include <utility>
 #include <vector>
 
+#include <lozti/core/types.hpp>
+
 namespace lozti {
 
 template <typename T> class
 vector_matrix
 {
 public:
-    typedef std::size_t size_type;
+    typedef lozti::size_type size_type;
     typedef T value_type;
     typedef std::vector<value_type> container_type;
     typedef typename container_type::iterator iterator;

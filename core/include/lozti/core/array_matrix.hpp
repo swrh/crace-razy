@@ -6,13 +6,15 @@
 #include <stdexcept>
 #include <utility>
 
+#include <lozti/core/types.hpp>
+
 namespace lozti {
 
-template <typename T, std::size_t S> class
+template <typename T, size_type S> class
 array_matrix
 {
 public:
-    typedef std::size_t size_type;
+    typedef lozti::size_type size_type;
     typedef T value_type;
     typedef std::array<value_type, S> container_type;
     typedef typename container_type::iterator iterator;
@@ -159,7 +161,7 @@ public:
     }
 };
 
-template <typename T, std::size_t W, std::size_t H> array_matrix<T, W * H>
+template <typename T, size_type W, size_type H> array_matrix<T, W * H>
 make_array_matrix()
 {
     return array_matrix<T, W * H>(W);

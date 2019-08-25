@@ -4,22 +4,24 @@
 #include <boost/test/unit_test.hpp>
 
 #include <lozti/core/algorithm.hpp>
+#include <lozti/core/types.hpp>
 #include <lozti/core/vector_matrix.hpp>
 
 using namespace std;
 
 using lozti::make_vector_matrix;
+using lozti::size_type;
 
 BOOST_AUTO_TEST_SUITE(test_suite_vector_matrix)
 
 BOOST_AUTO_TEST_CASE(test_case)
 {
-    std::size_t i;
+    size_type i;
     auto m = make_vector_matrix<int>(5, 3);
 
     i = 0;
-    for (std::size_t y = 0; y < m.height(); ++y) {
-        for (std::size_t x = 0; x < m.width(); ++x) {
+    for (size_type y = 0; y < m.height(); ++y) {
+        for (size_type x = 0; x < m.width(); ++x) {
             m.at(x, y) = i++;
         }
     }
@@ -27,14 +29,14 @@ BOOST_AUTO_TEST_CASE(test_case)
     auto n = m;
 
     i = 0;
-    for (std::size_t y = 0; y < m.height(); ++y) {
-        for (std::size_t x = 0; x < m.width(); ++x) {
+    for (size_type y = 0; y < m.height(); ++y) {
+        for (size_type x = 0; x < m.width(); ++x) {
             BOOST_REQUIRE_EQUAL(m.at(x, y), i++);
         }
     }
 
-    for (std::size_t y = m.height(); y > 0; --y) {
-        for (std::size_t x = m.width(); x > 0; --x) {
+    for (size_type y = m.height(); y > 0; --y) {
+        for (size_type x = m.width(); x > 0; --x) {
             BOOST_REQUIRE_EQUAL(m.at(x - 1, y - 1), --i);
         }
     }
@@ -42,8 +44,8 @@ BOOST_AUTO_TEST_CASE(test_case)
     BOOST_REQUIRE_EQUAL(m.width(), n.width());
     BOOST_REQUIRE_EQUAL(m.height(), n.height());
 
-    for (std::size_t y = 0; y < m.height(); ++y) {
-        for (std::size_t x = 0; x < m.width(); ++x) {
+    for (size_type y = 0; y < m.height(); ++y) {
+        for (size_type x = 0; x < m.width(); ++x) {
             BOOST_REQUIRE_EQUAL(m.at(x, y), n.at(x, y));
         }
     }
@@ -51,7 +53,7 @@ BOOST_AUTO_TEST_CASE(test_case)
 
 BOOST_AUTO_TEST_CASE(test_case_swap)
 {
-    std::size_t i;
+    size_type i;
     auto m = make_vector_matrix<int>(5, 3);
 
     BOOST_REQUIRE_EQUAL(m.width(), 5);
@@ -59,8 +61,8 @@ BOOST_AUTO_TEST_CASE(test_case_swap)
     BOOST_REQUIRE_EQUAL(m.size(), 5 * 3);
 
     i = 0;
-    for (std::size_t y = 0; y < m.height(); ++y) {
-        for (std::size_t x = 0; x < m.width(); ++x) {
+    for (size_type y = 0; y < m.height(); ++y) {
+        for (size_type x = 0; x < m.width(); ++x) {
             m.at(x, y) = i;
             BOOST_REQUIRE_EQUAL(m.at(x, y), i);
             ++i;
@@ -73,8 +75,8 @@ BOOST_AUTO_TEST_CASE(test_case_swap)
     BOOST_REQUIRE_EQUAL(n.height(), 1);
     BOOST_REQUIRE_EQUAL(n.size(), 1);
 
-    for (std::size_t y = 0; y < n.height(); ++y) {
-        for (std::size_t x = 0; x < n.width(); ++x) {
+    for (size_type y = 0; y < n.height(); ++y) {
+        for (size_type x = 0; x < n.width(); ++x) {
             BOOST_REQUIRE_EQUAL(n.at(x, y), 0);
         }
     }
@@ -86,8 +88,8 @@ BOOST_AUTO_TEST_CASE(test_case_swap)
     BOOST_REQUIRE_EQUAL(n.size(), 5 * 3);
 
     i = 0;
-    for (std::size_t y = 0; y < n.height(); ++y) {
-        for (std::size_t x = 0; x < n.width(); ++x) {
+    for (size_type y = 0; y < n.height(); ++y) {
+        for (size_type x = 0; x < n.width(); ++x) {
             BOOST_REQUIRE_EQUAL(n.at(x, y), i++);
         }
     }
@@ -96,8 +98,8 @@ BOOST_AUTO_TEST_CASE(test_case_swap)
     BOOST_REQUIRE_EQUAL(m.height(), 1);
     BOOST_REQUIRE_EQUAL(m.size(), 1);
 
-    for (std::size_t y = 0; y < m.height(); ++y) {
-        for (std::size_t x = 0; x < m.width(); ++x) {
+    for (size_type y = 0; y < m.height(); ++y) {
+        for (size_type x = 0; x < m.width(); ++x) {
             BOOST_REQUIRE_EQUAL(m.at(x, y), 0);
         }
     }
