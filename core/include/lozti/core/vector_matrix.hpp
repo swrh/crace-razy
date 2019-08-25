@@ -16,6 +16,7 @@ public:
     typedef T value_type;
     typedef std::vector<value_type> container_type;
     typedef typename container_type::iterator iterator;
+    typedef typename container_type::const_iterator const_iterator;
 
 private:
     container_type data_;
@@ -99,8 +100,20 @@ public:
         return data_.begin();
     }
 
+    const_iterator
+    cbegin() const
+    {
+        return data_.begin();
+    }
+
     iterator
     end()
+    {
+        return data_.end();
+    }
+
+    const_iterator
+    cend() const
     {
         return data_.end();
     }
