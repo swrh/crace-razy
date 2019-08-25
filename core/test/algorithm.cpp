@@ -6,8 +6,6 @@
 #include <lozti/core/algorithm.hpp>
 #include <lozti/core/vector_matrix.hpp>
 
-using namespace std;
-
 using lozti::flip_lr;
 using lozti::flip_ud;
 using lozti::transpose;

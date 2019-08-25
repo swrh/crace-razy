@@ -7,8 +7,6 @@
 #include <lozti/core/array_matrix.hpp>
 #include <lozti/core/types.hpp>
 
-using namespace std;
-
 using lozti::make_array_matrix;
 using lozti::size_type;
 

@@ -7,8 +7,6 @@
 #include <lozti/core/types.hpp>
 #include <lozti/core/vector_matrix.hpp>
 
-using namespace std;
-
 using lozti::make_vector_matrix;
 using lozti::size_type;
 

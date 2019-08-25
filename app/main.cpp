@@ -6,7 +6,9 @@
 
 #include <boost/program_options.hpp>
 
-using namespace std;
+using std::cout;
+using std::endl;
+using std::exception;
 
 namespace po = boost::program_options;
 
