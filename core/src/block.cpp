@@ -1,77 +1,39 @@
 #include <algorithm>
-#include <vector>
 
 #include <lozti/core/block.hpp>
 
 #include <lozti/core/algorithm.hpp>
 
-using std::find;
-using std::vector;
-
 using lozti::block;
 
 namespace lozti {
 
-/**
- * Rotate the input matrix and return all possible positions in a container.
- */
-template <template <class ...> class V, class T> static V<T>
-rotates(T matrix)
-{
-    V<T> ret;
-
-    unsigned int n = 0;
-    for (;;) {
-        if (find(ret.begin(), ret.end(), matrix) != ret.end())
-            break;
-
-        ret.push_back(matrix);
-
-        if (++n >= 4)
-            break;
-
-        // Rotate CCW.
-        flip_lr(matrix);
-        transpose(matrix);
-    }
-
-    return ret;
-}
-
-block::iterator::iterator(const block &b)
-    : block_(b)
+block::block(const block_data &data)
+    : data_(data)
 {
 }
 
-const block::matrix_type *
-block::iterator::operator->() const
+const block_data::matrix_type &
+block::matrix() const
 {
-    return &block_[n];
+    return data_[n];
 }
 
-const block::matrix_type &
-block::iterator::operator*() const
+void
+block::rotate_clockwise()
 {
-    return block_[n];
-}
-
-block::iterator &
-block::iterator::operator++()
-{
-    size_type size = block_.size();
+    size_type size = data_.size();
 
     if (size <= 0 || n >= (size - 1))
         n = 0;
     else
         ++n;
-
-    return *this;
 }
 
-block::iterator &
-block::iterator::operator--()
+void
+block::rotate_counterclockwise()
 {
-    size_type size = block_.size();
+    size_type size = data_.size();
 
     if (size <= 0)
         n = 0;
@@ -79,59 +41,6 @@ block::iterator::operator--()
         n = size - 1;
     else
         --n;
-
-    return *this;
-}
-
-block::block(const matrix_type &matrix)
-    : matrices(rotates<vector>(matrix))
-{
-}
-
-const block::matrix_type &
-block::operator[](size_type n) const
-{
-    return matrices[n];
-}
-
-block::size_type
-block::size() const
-{
-    return matrices.size();
-}
-
-const block::matrix_type &
-block::at(size_type n) const
-{
-    return matrices.at(n);
-}
-
-block::iterator
-block::iterate() const
-{
-    return iterator(*this);
-}
-
-bool
-operator<(const block &left, const block &right)
-{
-    const auto &lm = left.matrices;
-    const auto &rm = right.matrices;
-
-    if (lm.size() < rm.size())
-        return true;
-
-    for (auto l = lm.cbegin(), r = rm.cbegin(); l != lm.end() && r != rm.end(); ++l, ++r) {
-        if (l->size() < r->size())
-            return true;
-    }
-
-    for (auto l = lm.cbegin(), r = rm.cbegin(); l != lm.end() && r != rm.end(); ++l, ++r) {
-        if (*l < *r)
-            return true;
-    }
-
-    return false;
 }
 
 }

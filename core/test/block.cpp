@@ -3,45 +3,44 @@
 #include <boost/test/unit_test.hpp>
 
 #include <lozti/core/block.hpp>
-#include <lozti/core/vector_matrix.hpp>
 
 using std::fill;
 
 using lozti::block;
-using lozti::vector_matrix;
+using lozti::block_data;
 
 BOOST_AUTO_TEST_SUITE(test_suite_block)
 
 BOOST_AUTO_TEST_CASE(test_case)
 {
-    block::matrix_type p0(1, 4);
+    block_data::matrix_type p0(1, 4);
 
     fill(p0.begin(), p0.end(), true);
 
-    block bl(p0);
+    block_data bl(p0);
 
     BOOST_REQUIRE_EQUAL(bl.size(), 2);
 
-    block::iterator it = bl.iterate();
+    block b(bl);
 
-    BOOST_REQUIRE_EQUAL(p0.size(), it->size());
-    BOOST_REQUIRE_EQUAL(bl.at(0), *it);
-    BOOST_REQUIRE_NE(bl.at(1), *it);
-    BOOST_REQUIRE_EQUAL(p0, *it);
+    BOOST_REQUIRE_EQUAL(p0.size(), b.matrix().size());
+    BOOST_REQUIRE_EQUAL(bl.at(0), b.matrix());
+    BOOST_REQUIRE_NE(bl.at(1), b.matrix());
+    BOOST_REQUIRE_EQUAL(p0, b.matrix());
 
-    ++it;
+    b.rotate_clockwise();
 
-    BOOST_REQUIRE_EQUAL(p0.size(), it->size());
-    BOOST_REQUIRE_NE(bl.at(0), *it);
-    BOOST_REQUIRE_EQUAL(bl.at(1), *it);
-    BOOST_REQUIRE_NE(p0, *it);
+    BOOST_REQUIRE_EQUAL(p0.size(), b.matrix().size());
+    BOOST_REQUIRE_NE(bl.at(0), b.matrix());
+    BOOST_REQUIRE_EQUAL(bl.at(1), b.matrix());
+    BOOST_REQUIRE_NE(p0, b.matrix());
 
-    ++it;
+    b.rotate_clockwise();
 
-    BOOST_REQUIRE_EQUAL(p0.size(), it->size());
-    BOOST_REQUIRE_EQUAL(bl.at(0), *it);
-    BOOST_REQUIRE_NE(bl.at(1), *it);
-    BOOST_REQUIRE_EQUAL(p0, *it);
+    BOOST_REQUIRE_EQUAL(p0.size(), b.matrix().size());
+    BOOST_REQUIRE_EQUAL(bl.at(0), b.matrix());
+    BOOST_REQUIRE_NE(bl.at(1), b.matrix());
+    BOOST_REQUIRE_EQUAL(p0, b.matrix());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

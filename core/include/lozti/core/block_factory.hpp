@@ -12,7 +12,7 @@ class
 block_factory
 {
 public:
-    typedef std::vector<block> container_type;
+    typedef std::vector<block_data> container_type;
     typedef container_type::size_type size_type;
 
 private:
@@ -21,20 +21,20 @@ private:
 public:
     block_factory();
 
-    block::iterator make_random() const;
+    block make_random() const;
 
     size_type size() const;
     container_type::const_iterator begin() const;
     container_type::const_iterator end() const;
 
 private:
-    static block::matrix_type draw_l();
-    static block::matrix_type draw_o();
-    static block::matrix_type draw_z();
-    static block::matrix_type draw_t();
-    static block::matrix_type draw_i();
+    static block_data::matrix_type draw_l();
+    static block_data::matrix_type draw_o();
+    static block_data::matrix_type draw_z();
+    static block_data::matrix_type draw_t();
+    static block_data::matrix_type draw_i();
 
-    static std::vector<block> make_blocks();
+    static std::vector<block_data> make_blocks();
 };
 
 }
