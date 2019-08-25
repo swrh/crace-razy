@@ -49,6 +49,61 @@ BOOST_AUTO_TEST_CASE(test_case)
     }
 }
 
+BOOST_AUTO_TEST_CASE(test_case_swap)
+{
+    std::size_t i;
+    auto m = make_array_matrix<int, 5, 3>();
+
+    BOOST_REQUIRE_EQUAL(m.width(), 5);
+    BOOST_REQUIRE_EQUAL(m.height(), 3);
+    BOOST_REQUIRE_EQUAL(m.size(), 5 * 3);
+
+    i = 0;
+    for (std::size_t y = 0; y < m.height(); ++y) {
+        for (std::size_t x = 0; x < m.width(); ++x) {
+            m.at(x, y) = i;
+            BOOST_REQUIRE_EQUAL(m.at(x, y), i);
+            ++i;
+        }
+    }
+
+    auto n = make_array_matrix<int, 5, 3>();
+
+    BOOST_REQUIRE_EQUAL(n.width(), 5);
+    BOOST_REQUIRE_EQUAL(n.height(), 3);
+    BOOST_REQUIRE_EQUAL(n.size(), 5 * 3);
+
+    for (std::size_t y = 0; y < n.height(); ++y) {
+        for (std::size_t x = 0; x < n.width(); ++x) {
+            n.at(x, y) = 0;
+            BOOST_REQUIRE_EQUAL(n.at(x, y), 0);
+        }
+    }
+
+    m.swap(n);
+
+    BOOST_REQUIRE_EQUAL(n.width(), 5);
+    BOOST_REQUIRE_EQUAL(n.height(), 3);
+    BOOST_REQUIRE_EQUAL(n.size(), 5 * 3);
+
+    i = 0;
+    for (std::size_t y = 0; y < n.height(); ++y) {
+        for (std::size_t x = 0; x < n.width(); ++x) {
+            BOOST_REQUIRE_EQUAL(n.at(x, y), i++);
+        }
+    }
+
+    BOOST_REQUIRE_EQUAL(m.width(), 5);
+    BOOST_REQUIRE_EQUAL(m.height(), 3);
+    BOOST_REQUIRE_EQUAL(m.size(), 5 * 3);
+
+    for (std::size_t y = 0; y < m.height(); ++y) {
+        for (std::size_t x = 0; x < m.width(); ++x) {
+            BOOST_REQUIRE_EQUAL(m.at(x, y), 0);
+        }
+    }
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 // vim:set sw=4 ts=4 et tw=120:

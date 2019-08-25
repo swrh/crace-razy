@@ -136,12 +136,13 @@ public:
     }
 
 public:
-    friend void
-    swap(array_matrix<T, S> &left, array_matrix<T, S> &right)
+    void
+    swap(array_matrix<T, S> &other)
     {
-        std::swap(left.data_, right.data_);
-        std::swap(left.width_, right.width_);
-        std::swap(left.height_, right.height_);
+        using std::swap;
+        data_.swap(other.data_);
+        swap(width_, other.width_);
+        swap(height_, other.height_);
     }
 };
 

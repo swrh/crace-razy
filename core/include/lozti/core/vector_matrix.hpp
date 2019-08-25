@@ -75,7 +75,7 @@ public:
     {
         if (this == &other)
             return *this;
-        std::swap(*this, other);
+        swap(other);
         return *this;
     }
 
@@ -158,12 +158,13 @@ public:
     }
 
 public:
-    friend void
-    swap(vector_matrix &left, vector_matrix &right)
+    void
+    swap(vector_matrix &other)
     {
-        std::swap(left.data_, right.data_);
-        std::swap(left.width_, right.width_);
-        std::swap(left.height_, right.height_);
+        using std::swap;
+        data_.swap(other.data_);
+        swap(width_, other.width_);
+        swap(height_, other.height_);
     }
 
 public:
