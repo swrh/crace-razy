@@ -97,6 +97,12 @@ public:
         return data_[i];
     }
 
+    const_iterator
+    begin() const
+    {
+        return data_.begin();
+    }
+
     iterator
     begin()
     {
@@ -104,19 +110,13 @@ public:
     }
 
     const_iterator
-    cbegin() const
-    {
-        return data_.begin();
-    }
-
-    iterator
-    end()
+    end() const
     {
         return data_.end();
     }
 
-    const_iterator
-    cend() const
+    iterator
+    end()
     {
         return data_.end();
     }
@@ -200,7 +200,7 @@ public:
         if (ld.size() < rd.size())
             return true;
 
-        for (auto l = ld.cbegin(), r = rd.cbegin(); l != ld.end() && r != rd.end(); ++l, ++r) {
+        for (auto l = ld.begin(), r = rd.begin(); l != ld.end() && r != rd.end(); ++l, ++r) {
             if (*l < *r)
                 return true;
         }

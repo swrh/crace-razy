@@ -74,6 +74,12 @@ public:
         return data_[i];
     }
 
+    const_iterator
+    begin() const
+    {
+        return data_.begin();
+    }
+
     iterator
     begin()
     {
@@ -81,19 +87,13 @@ public:
     }
 
     const_iterator
-    cbegin() const
-    {
-        return data_.begin();
-    }
-
-    iterator
-    end()
+    end() const
     {
         return data_.end();
     }
 
-    const_iterator
-    cend() const
+    iterator
+    end()
     {
         return data_.end();
     }

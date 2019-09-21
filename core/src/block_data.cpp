@@ -70,12 +70,12 @@ operator<(const block_data &left, const block_data &right)
     if (lm.size() < rm.size())
         return true;
 
-    for (auto l = lm.cbegin(), r = rm.cbegin(); l != lm.end() && r != rm.end(); ++l, ++r) {
+    for (auto l = lm.begin(), r = rm.begin(); l != lm.end() && r != rm.end(); ++l, ++r) {
         if (l->size() < r->size())
             return true;
     }
 
-    for (auto l = lm.cbegin(), r = rm.cbegin(); l != lm.end() && r != rm.end(); ++l, ++r) {
+    for (auto l = lm.begin(), r = rm.begin(); l != lm.end() && r != rm.end(); ++l, ++r) {
         if (*l < *r)
             return true;
     }

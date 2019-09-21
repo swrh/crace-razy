@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE(test_case)
         const board::matrix_type &matrix = brd.matrix();
 
         BOOST_REQUIRE_EQUAL(matrix.size(), 100 * 100);
-        for (board::matrix_type::const_iterator it = matrix.cbegin(); it != matrix.cend(); ++it) {
+        for (board::matrix_type::const_iterator it = matrix.begin(); it != matrix.end(); ++it) {
             BOOST_REQUIRE_EQUAL(*it, false);
         }
 
