@@ -16,8 +16,8 @@ vector_matrix
 {
 public:
     typedef lozti::size_type size_type;
-    typedef T value_type;
-    typedef std::vector<value_type> container_type;
+    typedef std::vector<T> container_type;
+    typedef typename container_type::value_type value_type;
     typedef typename container_type::iterator iterator;
     typedef typename container_type::const_iterator const_iterator;
 

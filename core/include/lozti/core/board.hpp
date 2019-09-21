@@ -16,8 +16,8 @@ board
 {
 public:
     typedef lozti::size_type size_type;
-    typedef bool value_type;
-    typedef lozti::vector_matrix<value_type> matrix_type;
+    typedef lozti::vector_matrix<bool> matrix_type;
+    typedef typename matrix_type::value_type value_type;
 
 public:
     class movable_block
