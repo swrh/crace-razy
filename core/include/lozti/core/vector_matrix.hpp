@@ -17,9 +17,11 @@ vector_matrix
 public:
     typedef lozti::size_type size_type;
     typedef std::vector<T> container_type;
-    typedef typename container_type::value_type value_type;
-    typedef typename container_type::iterator iterator;
     typedef typename container_type::const_iterator const_iterator;
+    typedef typename container_type::iterator iterator;
+    typedef typename container_type::const_reference const_reference;
+    typedef typename container_type::reference reference;
+    typedef typename container_type::value_type value_type;
 
 private:
     container_type data_;
@@ -91,7 +93,13 @@ public:
             (data_ == other.data_);
     }
 
-    value_type &
+    const_reference
+    operator[](size_type i) const
+    {
+        return data_[i];
+    }
+
+    reference
     operator[](size_type i)
     {
         return data_[i];
@@ -140,25 +148,25 @@ public:
     }
 
 public:
-    const value_type &
+    const_reference
     operator()(size_type x, size_type y) const
     {
         return data_[width_ * y + x];
     }
 
-    value_type &
+    reference
     operator()(size_type x, size_type y)
     {
         return data_[width_ * y + x];
     }
 
-    const value_type &
+    const_reference
     at(size_type x, size_type y) const
     {
         return data_.at(width_ * y + x);
     }
 
-    value_type &
+    reference
     at(size_type x, size_type y)
     {
         return data_.at(width_ * y + x);
